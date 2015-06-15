@@ -55,11 +55,12 @@ public class Apresentacao extends Entidade {
 		this.situacao = situacao;
 	}
 
-	public Autor getAutor() {
+	public List<Autor> getAutor() {
 		return autor;
 	}
 
-	public void setAutor(Autor autor) {
+	public void setAutor(List<Autor> autor) {
 		this.autor = autor;
 	}
+
 }

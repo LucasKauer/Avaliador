@@ -2,8 +2,13 @@ package avaliador.model;
 
 public class Autor extends Entidade {
 	private String nome;
+	private String email;
 	private String genero;
 
+	public Autor() {
+		
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -18,5 +23,13 @@ public class Autor extends Entidade {
 
 	public void setGenero(String genero) {
 		this.genero = genero;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
