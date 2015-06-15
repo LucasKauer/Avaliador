@@ -1,11 +1,19 @@
 package avaliador.model;
 
+import java.util.Date;
+import java.util.List;
+
 public class Apresentacao extends Entidade {
 	private String titulo;
 	private String resumo;
 	private Categoria categoria;
-	private String data;
+	private Date data;
 	private Situacao situacao;
+	private List<Autor> autor;
+	
+	public Apresentacao() {
+		
+	}
 
 	public String getTitulo() {
 		return titulo;
@@ -31,11 +39,11 @@ public class Apresentacao extends Entidade {
 		this.categoria = categoria;
 	}
 
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
@@ -45,5 +53,13 @@ public class Apresentacao extends Entidade {
 
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
+	}
+
+	public Autor getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Autor autor) {
+		this.autor = autor;
 	}
 }
