@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -75,15 +74,7 @@ public class ApresentacaoDao {
 			apresentacao.setCategoria(Categoria.valueOf(results.getString("Categoria")));
 			apresentacao.setData(results.getDate("Data"));
 			apresentacao.setSituacao(Situacao.valueOf(results.getString("Situacao")));
-			
-			filme.setNome(results.getString("NOME"));
-			filme.setGenero(Genero.valueOf(results.getString("GENERO")));
-			filme.setAnoLancamento(results.getInt("ANO_LANCAMENTO"));
-			filme.setDiretor(results.getString("DIRETOR"));
-			filme.setSinopse(results.getString("SINOPSE"));
-			filme.setImagem(results.getString("IMAGEM"));
-			filme.setNota(results.getDouble("MEDIA"));
-			return filme;
+			return apresentacao;
 		});		
 		
 		return apresentacoes;
