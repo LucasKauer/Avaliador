@@ -3,7 +3,7 @@ package avaliador.model;
 public class Usuario extends Entidade {
 	private String login;
 	private String senha;
-	private TipoUsuario tipoUsuario;
+	private NivelUsuario nivelUsuario;
 
 	public String getLogin() {
 		return login;
@@ -21,11 +21,11 @@ public class Usuario extends Entidade {
 		this.senha = senha;
 	}
 
-	public TipoUsuario getTipoUsuario() {
-		return tipoUsuario;
+	public NivelUsuario getTipoUsuario() {
+		return nivelUsuario;
 	}
 
-	public void setTipoUsuario(TipoUsuario tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
+	public void setTipoUsuario(NivelUsuario tipoUsuario) {
+		this.nivelUsuario = tipoUsuario;
 	}
 }
