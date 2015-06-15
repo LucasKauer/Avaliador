@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import avaliador.model.NivelUsuario;
 import avaliador.model.SenhaHash;
 import avaliador.model.Usuario;
 
@@ -26,9 +27,10 @@ public class UsuarioDao {
 	public void inserirUsuario(Usuario usuario) throws DataAccessException, NoSuchAlgorithmException, InvalidKeySpecException {
 		
 		String senhaCriptografada = SenhaHash.criaHash(usuario.getSenha());
+		
 		jdbcTemplate.update(
-				"INSERT INTO USUARIO (LOGIN, SENHA) VALUES (?, ?)",
-				usuario.getLogin(), senhaCriptografada);
+				"INSERT INTO USUARIO (LOGIN, SENHA, NIVEL_USUARIO) VALUES (?, ?, ?)",
+				usuario.getLogin(), senhaCriptografada, NivelUsuario.COMUM);
 	}
 
 }

@@ -1,11 +1,11 @@
 package avaliador.model;
 
-public enum TipoUsuario {
+public enum NivelUsuario {
 	COMUM("Comum"), AVALIADOR("Avaliador"), ADMINISTRADOR("Administrador");
 	
 	private String descricao;
 	
-	private TipoUsuario(String descricao) {
+	private NivelUsuario(String descricao) {
 		this.setDescricao(descricao);
 	}
 
