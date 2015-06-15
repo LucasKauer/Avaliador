@@ -207,7 +207,7 @@ header .header-content .header-content-inner hr {
 
 header .header-content .header-content-inner p {
     margin-bottom: 50px;
-    font-size: 36px;
+    font-size: 4vw;
     font-weight: 300;
     color: #fffbfb;
     text-shadow: #d0d0d0 0.02em 0.02em 0.02em;
@@ -477,3 +477,35 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: #222;
 }
+
+.header-content-inner h1{
+    font-size: 5.5vw;   
+}
+
+@media(max-width:770px) {
+    .header-content-inner h1{
+        font-size: 8vw;
+    }
+    
+    header{
+        background-size: cover;
+        height: 100vh;
+    }
+    
+    header .header-content .header-content-inner{
+        margin-top: 30vh;   
+    }
+}
+
+@media(max-width:400px) {
+    header{
+        background-size: cover;
+        height: 120vh;
+    }
+}
+
+.header-content-inner{
+    font-size: 5.5vw;  
+}
+
+
