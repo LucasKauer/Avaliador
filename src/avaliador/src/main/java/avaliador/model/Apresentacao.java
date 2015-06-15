@@ -8,6 +8,7 @@ public class Apresentacao extends Entidade {
 	private Categoria categoria;
 	private Date data;
 	private Situacao situacao;
+	private Autor autor;
 	
 	public Apresentacao() {
 		
@@ -51,5 +52,13 @@ public class Apresentacao extends Entidade {
 
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
+	}
+
+	public Autor getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Autor autor) {
+		this.autor = autor;
 	}
 }
