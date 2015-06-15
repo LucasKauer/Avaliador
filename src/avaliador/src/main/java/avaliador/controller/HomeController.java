@@ -12,8 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String menu(Model model, HttpSession session) {
+	public String home(Model model, HttpSession session) {
 		return "index";
+	}
+	
+	@RequestMapping(value = "/entrar", method = RequestMethod.GET)
+	public String entrar(Model model, HttpSession session) {
+		return "login";
 	}
 
 }
