@@ -56,12 +56,15 @@ public class ApresentacaoDao {
 	 * Apaga uma apresentacao do banco
 	 * @param id Id da apresentacao a ser excluida
 	 */
-	public void deletarApresentacao(int id) {
+	public void deletaApresentacao(int id) {
 		jdbcTemplate.update(COMANDO_SQL_DELETE,
 				id);
 	}
 	
-	
+	/**
+	 * Busca todas as apresentacoes do banco
+	 * @return apresentacoes
+	 */
 	public List<Apresentacao> consultaApresentacoes() {
 		List<Apresentacao> apresentacoes = jdbcTemplate.query(COMANDO_SQL_SELECT, (ResultSet results,
 				int rowNum) -> {
@@ -81,6 +84,4 @@ public class ApresentacaoDao {
 
 	}
 	
-	
-
 }
