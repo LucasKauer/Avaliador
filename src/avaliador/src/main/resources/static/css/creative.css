@@ -100,7 +100,7 @@ aside {
 .navbar-default .nav > li>a,
 .navbar-default .nav>li>a:focus {
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 700;
     color: #222;
 }
@@ -207,7 +207,7 @@ header .header-content .header-content-inner hr {
 
 header .header-content .header-content-inner p {
     margin-bottom: 50px;
-    font-size: 20px;
+    font-size: 36px;
     font-weight: 300;
     color: #fffbfb;
     text-shadow: #d0d0d0 0.02em 0.02em 0.02em;
@@ -238,7 +238,7 @@ header .header-content .header-content-inner p {
         margin-right: auto;
         margin-left: auto;
         max-width: 80%;
-        font-size: 18px;
+        font-size: 26px;
     }
 }
 
