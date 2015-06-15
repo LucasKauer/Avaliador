@@ -1,6 +1,7 @@
 package avaliador.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Apresentacao extends Entidade {
 	private String titulo;
@@ -8,7 +9,7 @@ public class Apresentacao extends Entidade {
 	private Categoria categoria;
 	private Date data;
 	private Situacao situacao;
-	private Autor autor;
+	private List<Autor> autor;
 	
 	public Apresentacao() {
 		
