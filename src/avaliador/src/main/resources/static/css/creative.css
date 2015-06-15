@@ -497,6 +497,13 @@ body {
     }
 }
 
+@media(max-width:400px) {
+    header{
+        background-size: cover;
+        height: 120vh;
+    }
+}
+
 .header-content-inner{
     font-size: 5.5vw;  
 }
