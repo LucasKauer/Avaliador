@@ -39,39 +39,37 @@
 				<form action="/salvar-apresentacao" method="post">
 					<div class="divformulario">
 						<label>Titulo:</label>
-						<input name="titulo" type="text" class="form-control" placeholder="Avaliador" required></input>
-						
+						<input name="titulo" type="text" class="form-control" placeholder="Avaliador" required></input>	
 					</div>
 					
 					<div class="divformulario">
 						<label>Resumo:</label>
-						<textarea name="titulo" type="text" class="form-control" placeholder="O Avaliador eh um dos TC do Crescer" rows="5" required></textarea>
+						<textarea name="resumo" type="text" class="form-control" placeholder="O Avaliador eh um dos TC do Crescer" rows="5" required></textarea>
 					</div>
 					<br></br><br></br>
 					<div class="divformulario">
 						<label>Categoria:</label>
 						<select name="categoria" class="form-control" required>
-							<option value="a">Categoria A</option>
-							<option value="b">Categoria B</option>
+							{{#categoria}}
+								<option value="{{.}}">{{descricao}}</option> 
+							{{/categoria}}
 						</select>
 					</div>
-				
 					<div class="divformulario">
 						<label>Data:</label>
 						<input name="data" type="datetime" class="form-control" placeholder="19/07/2015 13:30:00" required>
 					</div>
-					
 					<div class="divformulario">
 						<label>Situacao:</label>
 						<select name="situacao" class="form-control" required>
-							<option value="agendada">Agendada</option>
-							<option value="avaliada">Avaliada</option>
-							<option value="cancelada">Cancelada</option>
+							{{#situacao}}
+								<option value="{{.}}">{{descricao}}</option> 
+							{{/situacao}}
 						</select>
 					</div>
 					
 					<div class="divformulario">
-						<input class="btn btn-primary btn-lg btn-block" type="submit" required value="Cadastrar">
+						<input class="btn btn-primary btn-lg btn-block" type="submit" value="Cadastrar">
 					</div>
 				</form>
 			</div>
