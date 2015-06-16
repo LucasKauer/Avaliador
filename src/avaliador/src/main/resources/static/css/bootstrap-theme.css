@@ -1,4 +1,4 @@
-/*!
+<h3 class="page-header"><i class="fa fa-file-text-o"></i>Cadastro de Avaliação</h3>/*!
  * Bootstrap v3.0.0
  *
  * Copyright 2013 Twitter, Inc
@@ -467,6 +467,7 @@ h4 small,
   padding-bottom: 9px;
   margin: 40px 0 20px;
   border-bottom: 1px solid #f7f7f7;
+  border-bottom-color: rgb(121, 121, 121);
 }
 ul,
 ol {
