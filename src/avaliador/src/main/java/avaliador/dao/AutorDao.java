@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
 
 import avaliador.model.Autor;
@@ -18,7 +19,9 @@ public class AutorDao {
 	
 	@Inject
 	private JdbcTemplate jdbcTemplate;
-	AutorApresentacaoDao apresentacaoAutor  = new AutorApresentacaoDao();
+
+    @Inject
+	AutorApresentacaoDao apresentacaoAutor;
 	
 	private static final String COMANDO_SQL_SELECT = "SELECT Id_Autor, Nome, Genero, Email FROM Autor";
 	private static final String COMANDO_SQL_INSERT = "INSERT INTO Autor(Nome, Genero, Email) values (?, ?, ?)";
@@ -37,7 +40,12 @@ public class AutorDao {
 					autor.getNome(),
 					autor.getGenero(),
 					autor.getEmail());
-		apresentacaoAutor.inseriAutorApresentacao(autor.getApresentacao(), autor);
+
+            Integer idAutorGerado = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+            autor.setId(idAutorGerado);
+
+            autor.setId(idAutorGerado);
+            apresentacaoAutor.inseriAutorApresentacao(autor.getApresentacao(), autor);
 		}
 	}
 	

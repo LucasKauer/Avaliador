@@ -28,6 +28,9 @@ public class AutorApresentacaoDao {
 		jdbcTemplate.update(COMANDO_SQL_INSERT,
 				apresentacao.getId(),
 				autor.getId());
+
+        //Integer idAutorApresentacaoGerado = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+
 	}
 	
 	/**

@@ -30,13 +30,32 @@
 				height:80px;
 			}
 		</style>
+        <script>
+            function adicionarAutor(){
+                var numeroAutorAtual = $('.nome-autor').size();
+                var nomeAutor = $('#nomeAutor').val();
+                var emailAutor = $('#emailAutor').val();
+
+                var htmlInputNome = '<input type="text" class="form-control nome-autor" name="autores['  + numeroAutorAtual + '].nome" value="' + nomeAutor + '">';
+                var htmlInputEmail = '<input type="text" class="form-control" name="autores['  + numeroAutorAtual + '].email" value="' + emailAutor + '">';
+                $('#formSalvarApresentacao').append(htmlInputNome);
+                $('#formSalvarApresentacao').append(htmlInputEmail);
+
+                // Limpa os campos
+                $('#nomeAutor').val('');
+                $('#emailAutor').val('');
+            }
+
+        </script>
 	</head>
 	
 	<body>
+
+
 		{{> nav}}
 		<header id="top" class="header">
 			<div class="text-vertical-center">
-				<form action="/salvar-apresentacao" method="post">
+				<form id="formSalvarApresentacao" action="/salvar-apresentacao" method="post">
 					<div class="divformulario">
 						<label>Titulo:</label>
 						<input name="titulo" type="text" class="form-control" placeholder="Avaliador" required></input>	
@@ -71,27 +90,28 @@
 						<input class="btn btn-primary btn-lg btn-block" type="submit" value="Cadastrar">
 					</div>
 				</form>
-		  <form action="/salvar-autor" method="post">
-          <div class="form-group">
-            <label for="recipient-name" class="control-label">Nome</label>
-            <input name="nome" type="text" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="control-label">Genero</label>
-            <select name="genero" class="form-control" required>
-  				<option value="M">Maculino</option>
-  				<option value="F">Feminino</option>
-			</select>
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="control-label">Email</label>
-            <input name="email" type="text" class="form-control" id="recipient-name" required>
-          </div>
-            <div class="modal-footer">
-        		<button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-        		<input class="btn btn-primary btn-lg btn-block" type="submit" value="Cadastrar">
-      		</div>
-        </form>
+
+
+
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">Nome</label>
+                <input id="nomeAutor" type="text" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label for="message-text" class="control-label">Email</label>
+                <input id="emailAutor" type="text" class="form-control" id="recipient-name" required>
+              </div>
+
+
+                <button class="btn btn-success" onclick="adicionarAutor()">
+                    Adicionar Autor
+                </button>
+
+
+
+
+
 			</div>
 		</header>
 	</body>

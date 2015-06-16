@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
 
 import avaliador.model.Apresentacao;
@@ -28,13 +29,19 @@ public class ApresentacaoDao {
 	 * @param apresentacao Apresentacao a ser inserida no banco
 	 */
 	public void inserirApresentacao(Apresentacao apresentacao) {
+
+
 		jdbcTemplate.update(COMANDO_SQL_INSERT,
 				apresentacao.getTitulo(),
 				apresentacao.getResumo(),
 				apresentacao.getCategoria().name(),
 				apresentacao.getData(),
 				apresentacao.getSituacao().name());
-	}
+
+
+        Integer idApresentacaoGerada = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        apresentacao.setId(idApresentacaoGerada);
+    }
 	
 	/**
 	 * Altera uma apresentacao no banco

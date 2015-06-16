@@ -3,6 +3,9 @@ package avaliador.controller;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import avaliador.dao.AutorApresentacaoDao;
+import avaliador.dao.AutorDao;
+import avaliador.model.Autor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +21,13 @@ public class ApresentacaoController {
 	
 	@Inject
 	ApresentacaoDao apresentacaoDao;
+
+
+    @Inject
+    AutorDao autorDao;
+
+    @Inject
+    AutorApresentacaoDao autorApresentacaoDao;
 	
 	@RequestMapping(value = "/cadastro-apresentacao", method = RequestMethod.GET)
 	public String cadastrarApresentacao(Model model, HttpSession session) {
@@ -28,7 +38,13 @@ public class ApresentacaoController {
 	
 	@RequestMapping(value = "/salvar-apresentacao", method = RequestMethod.POST)
 	public String salvaApresentacao(Apresentacao apresentacao) {
-		apresentacaoDao.inserirApresentacao(apresentacao);
+        apresentacaoDao.inserirApresentacao(apresentacao);
+        for (Autor autor : apresentacao.getAutores()) {
+            autor.setApresentacao(apresentacao);
+            autor.setGenero("M");
+            autorDao.inseriAutor(autor);
+        }
+
 		return "redirect:/lista-apresentacao";
 	}
 	
