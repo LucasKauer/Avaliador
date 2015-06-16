@@ -7,6 +7,15 @@
 		<!-- Custom styles -->
 		<link href="css/style.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/bootstrap-glyphicons.css">
+        <style>
+            .checkbox{
+                margin-left: 20px;   
+            }
+            
+            .login-form a{
+                color: #333 !important;  
+            }
+        </style>
 		{{> head}}
 	</head>
 
@@ -18,15 +27,15 @@
 					<p class="login-img"><img src="img/lock.png" width="40"></p>
 					<div class="input-group">
 						<span class="input-group-addon"></span>
-						<input type="text" class="form-control" placeholder="Username" autofocus>
+						<input type="text" class="form-control" placeholder="Nome de Usuário" autofocus>
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon"></span>
-						<input type="password" class="form-control" placeholder="Password">
+						<input type="password" class="form-control" placeholder="Senha">
 					</div>
 					<label class="checkbox">
-						<input type="checkbox" value="lembre-me"> Lembre-me
-						<span class="pull-right"> <a href="#">Esqueceu sua senha?</a></span>
+                        <input type="checkbox" value="lembre-me">Lembre-me
+						<span class="pull-right"><a href="#">Esqueceu sua senha?</a></span>
 					</label>
 					<button class="btn btn-primary btn-lg btn-block" type="submit">Entrar</button>
 					<button class="btn btn-info btn-lg btn-block" type="submit">Cadastrar-se</button>
