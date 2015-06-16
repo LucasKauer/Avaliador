@@ -23,7 +23,7 @@ public class ApresentacaoController {
 	public String cadastrarApresentacao(Model model, HttpSession session) {
 		model.addAttribute("categoria", Categoria.values());
 		model.addAttribute("situacao", Situacao.values());
-		return "cadastro-apresentacao";
+		return "cadastroApresentacao";
 	}
 	
 	@RequestMapping(value = "/salvar-apresentacao", method = RequestMethod.POST)
