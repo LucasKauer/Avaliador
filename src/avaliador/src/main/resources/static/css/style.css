@@ -4026,8 +4026,13 @@ ul.amounts li {
 
 
 .round-input {
-    border-radius: 500px;
-    -webkit-border-radius: 500px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+.round-input-menor {
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
 }
 
 
