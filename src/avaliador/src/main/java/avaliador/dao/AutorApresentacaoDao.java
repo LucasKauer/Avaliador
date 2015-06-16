@@ -5,7 +5,8 @@ import javax.inject.Inject;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import avaliador.model.Autor;
+import avaliador.model.Apresentacao;
+
 
 @Component
 public class AutorApresentacaoDao {
@@ -22,9 +23,9 @@ public class AutorApresentacaoDao {
 	 * @param apresentacaoId Id da apresentacao a ser inserida no banco
 	 * @param autorId Id do autor a ser inserido no banco
 	 */
-	public void inserirAutor(int apresentacaoId, int autorId) {
+	public void inserirAutorApresentacao(Apresentacao apresentacao, int autorId) {
 		jdbcTemplate.update(COMANDO_SQL_INSERT,
-				apresentacaoId,
+				apresentacao.getId(),
 				autorId);
 	}
 	
@@ -33,11 +34,9 @@ public class AutorApresentacaoDao {
 	 * @param apresentacaoId Id da apresentacao a ser alterada no banco
 	 * @param autorId Id do autor a ser alterada no banco
 	 */
-	public void alteraAutor(int apresentacaoId, int autorId) {
+	public void alteraAutorApresentacao(Apresentacao apresentacao, int autorId) {
 		jdbcTemplate.update(COMANDO_SQL_UPDATE,
-				apresentacaoId,
-				autorId,
-				apresentacaoId,
+				apresentacao.getId(),
 				autorId);
 	}
 	
@@ -46,9 +45,9 @@ public class AutorApresentacaoDao {
 	 * @param apresentacaoId Id da apresentacao a ser apagado no banco
 	 * @param autorId Id do autor a ser apagado no banco
 	 */
-	public void deletaAutor(int apresentacaoId, int autorId) {
+	public void deletaAutorApresentacao(Apresentacao apresentacao, int autorId) {
 		jdbcTemplate.update(COMANDO_SQL_DELETE,
-				apresentacaoId,
+				apresentacao.getId(),
 				autorId);
 	}
 }
