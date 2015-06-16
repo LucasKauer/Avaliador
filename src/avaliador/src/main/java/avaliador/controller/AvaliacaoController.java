@@ -13,17 +13,16 @@ import avaliador.model.Avaliacao;
 public class AvaliacaoController {
 	
 	@Inject
-	AvaliacaoDao dao;
+	AvaliacaoDao avaliacaoDao;
 	
 	@RequestMapping(value = "/cadastro-avaliacao", method = RequestMethod.GET)
 	public String cadastrarAvaliacao() {
 		return "cadastro-avaliacao";
 	}
 	
-	/*@RequestMapping(value = "/salvar-avaliacao", method = RequestMethod.POST)
+	@RequestMapping(value = "/salvar-avaliacao", method = RequestMethod.POST)
 	public String salvarAvaliacao(Avaliacao avaliacao) {
-		dao.inserirAvaliacao(avaliacao);
-		return "cadastro-avaliacao";
-	}*/
-
+		avaliacaoDao.inserirAvaliacao(avaliacao);
+		return "redirect:/index";
+	}
 }
