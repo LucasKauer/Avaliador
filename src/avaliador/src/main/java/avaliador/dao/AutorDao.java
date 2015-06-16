@@ -37,7 +37,7 @@ public class AutorDao {
 					autor.getNome(),
 					autor.getGenero(),
 					autor.getEmail());
-		apresentacaoAutor.inserirAutorApresentacao(autor.getApresentacao(), autor.getId());
+		apresentacaoAutor.inseriAutorApresentacao(autor.getApresentacao(), autor);
 		}
 	}
 	
@@ -66,23 +66,23 @@ public class AutorDao {
 	 * @param id Id do autor a ser alterada
 	 * @param autor Autor a ser substituida
 	 */
-	public void alteraAutor(int id, Autor autor) {
+	public void alteraAutor(Autor autor) {
 		jdbcTemplate.update(COMANDO_SQL_UPDATE,
 				autor.getNome(),
 				autor.getGenero(),
 				autor.getEmail(),
-				id);
-		apresentacaoAutor.alteraAutorApresentacao(autor.getApresentacao(), id);
+				autor.getId());
+		apresentacaoAutor.alteraAutorApresentacao(autor.getApresentacao(), autor);
 	}
 	
 	/**
 	 * Apaga um autor do banco
 	 * @param id Id do autor a ser excluido
 	 */
-	public void deletaAutor(int id, Autor autor) {
+	public void deletaAutor(Autor autor) {
 		jdbcTemplate.update(COMANDO_SQL_DELETE,
-				id);
-		apresentacaoAutor.deletaAutorApresentacao(autor.getApresentacao(), id);
+				autor.getId());
+		apresentacaoAutor.deletaAutorApresentacao(autor.getApresentacao(), autor);
 	}
 	
 	/**

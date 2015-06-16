@@ -24,7 +24,7 @@ public class AutorApresentacaoDao {
 	 * @param apresentacaoId Id da apresentacao a ser inserida no banco
 	 * @param autorId Id do autor a ser inserido no banco
 	 */
-	public void inserirAutorApresentacao(Apresentacao apresentacao, Autor autor) {
+	public void inseriAutorApresentacao(Apresentacao apresentacao, Autor autor) {
 		jdbcTemplate.update(COMANDO_SQL_INSERT,
 				apresentacao.getId(),
 				autor.getId());
