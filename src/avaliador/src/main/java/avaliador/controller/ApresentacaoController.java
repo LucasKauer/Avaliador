@@ -17,7 +17,7 @@ import avaliador.model.Situacao;
 public class ApresentacaoController {
 	
 	@Inject
-	ApresentacaoDao dao;
+	ApresentacaoDao apresentacaoDao;
 	
 	@RequestMapping(value = "/cadastro-apresentacao", method = RequestMethod.GET)
 	public String cadastrarApresentacao(Model model, HttpSession session) {
@@ -26,15 +26,15 @@ public class ApresentacaoController {
 		return "cadastro-apresentacao";
 	}
 	
-	/*@RequestMapping(value = "/salvar-apresentacao", method = RequestMethod.POST)
+	@RequestMapping(value = "/salvar-apresentacao", method = RequestMethod.POST)
 	public String salvaApresentacao(Apresentacao apresentacao) {
-		dao.inserirApresentacao(apresentacao);
-		return "cadastro-apresentacao";
-	}*/
+		apresentacaoDao.inserirApresentacao(apresentacao);
+		return "redirect:/lista-apresentacao";
+	}
 	
-	/*@RequestMapping(value = "/listar-apresentacao", method = RequestMethod.GET)
+	@RequestMapping(value = "/lista-apresentacao", method = RequestMethod.GET)
 	public String listarApresentacao(Model model) {
-		model.addAttribute("apresentacao", dao.consultaApresentacoes());
+		model.addAttribute("apresentacao", apresentacaoDao.consultaApresentacoes());
 		return "lista-apresentacao";
-	}*/
+	}
 }
