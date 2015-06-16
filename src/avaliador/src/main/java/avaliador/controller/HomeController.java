@@ -15,14 +15,4 @@ public class HomeController {
 	public String home(Model model, HttpSession session) {
 		return "index";
 	}
-	
-	@RequestMapping(value = "/entrar", method = RequestMethod.GET)
-	public String entrar(Model model, HttpSession session) {
-		return "login";
-	}
-	
-	@RequestMapping(value = "/cadastrar-usuario", method = RequestMethod.GET)
-	public String cadastrarusuario(Model model, HttpSession session) {
-		return "cadastrar-usuario";
-	}
 }

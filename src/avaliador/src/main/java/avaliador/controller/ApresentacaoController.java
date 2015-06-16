@@ -23,18 +23,18 @@ public class ApresentacaoController {
 	public String cadastrarApresentacao(Model model, HttpSession session) {
 		model.addAttribute("categoria", Categoria.values());
 		model.addAttribute("situacao", Situacao.values());
-		return "cadastroApresentacao";
-	}
-	
-	@RequestMapping(value = "/salvar-apresentacao", method = RequestMethod.POST)
-	public String salvaApresentacao(Apresentacao apresentacao) {
-		dao.inserirApresentacao(apresentacao);
 		return "cadastro-apresentacao";
 	}
 	
-	@RequestMapping(value = "/listar-apresentacao", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/salvar-apresentacao", method = RequestMethod.POST)
+	public String salvaApresentacao(Apresentacao apresentacao) {
+		dao.inserirApresentacao(apresentacao);
+		return "cadastro-apresentacao";
+	}*/
+	
+	/*@RequestMapping(value = "/listar-apresentacao", method = RequestMethod.GET)
 	public String listarApresentacao(Model model) {
 		model.addAttribute("apresentacao", dao.consultaApresentacoes());
 		return "lista-apresentacao";
-	}
+	}*/
 }

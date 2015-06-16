@@ -20,10 +20,10 @@ public class AvaliacaoController {
 		return "cadastro-avaliacao";
 	}
 	
-	@RequestMapping(value = "/salvar-avaliacao", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/salvar-avaliacao", method = RequestMethod.POST)
 	public String salvarAvaliacao(Avaliacao avaliacao) {
 		dao.inserirAvaliacao(avaliacao);
 		return "cadastro-avaliacao";
-	}
+	}*/
 
 }
