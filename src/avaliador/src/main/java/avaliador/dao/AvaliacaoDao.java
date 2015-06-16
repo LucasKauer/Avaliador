@@ -8,18 +8,20 @@ import javax.inject.Inject;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import avaliador.model.Avaliacao;
 
+@Component
 public class AvaliacaoDao {
-	
-	private final String COMANDO_SQL_INSERT = "INSERT INTO AVALIACAO (Nota_Conteudo, Nota_Inovacao, Nota_apresentacao, Restricao) VALUES (?, ?, ?, ?)";
-	private final String COMANDO_SQL_UPDATE = "UPDATE AVALIACAO SET Nota_Conteudo = ?, Nota_Inovacao = ?, Nota_apresentacao = ?, Restricao = ? WHERE Id_Avaliacao = ?";
-	private final String COMANDO_SQL_DELETE = "DELETE FROM AVALIACAO WHERE Id_Avaliacao = ?";
-	private final String COMANDO_SQL_SELECT = "SELECT Id_Avaliacao, Nota_Conteudo, Nota_Inovacao, Nota_Apresentacao, Restricao FROM AVALIACAO";
 	
 	@Inject
 	private JdbcTemplate jdbcTemplate;
+	
+	private final String COMANDO_SQL_INSERT = "INSERT INTO AVALIACAO (Comentario_Geral, Critica_Tecnica, Nota_Conteudo, Nota_Inovacao, Nota_apresentacao, Restricao, Avaliador_Id, Apresentacao_Id) VALUES (?, ?, ?, ?, ?, ?, 1, 1)";
+	private final String COMANDO_SQL_UPDATE = "UPDATE AVALIACAO SET Comentario_Geral = ?, Critica_Tecnica = ?, Nota_Conteudo = ?, Nota_Inovacao = ?, Nota_apresentacao = ?, Restricao = ? WHERE Id_Avaliacao = ?";
+	private final String COMANDO_SQL_DELETE = "DELETE FROM AVALIACAO WHERE Id_Avaliacao = ?";
+	private final String COMANDO_SQL_SELECT = "SELECT Id_Avaliacao, Comentario_Geral, Critica_Tecnica, Nota_Conteudo, Nota_Inovacao, Nota_Apresentacao, Restricao FROM AVALIACAO";
 	
 	/**
 	*  Adiciona Avaliacao no banco
@@ -28,6 +30,8 @@ public class AvaliacaoDao {
 	public void inserirAvaliacao(Avaliacao avaliacao) {
 		jdbcTemplate.update(
 				COMANDO_SQL_INSERT,
+				avaliacao.getComentarioGeral(),
+				avaliacao.getCriticaTecnica(),
 				avaliacao.getNotaConteudo(),
 				avaliacao.getNotaInovacao(),
 				avaliacao.getNotaApresentacao(),
@@ -45,6 +49,8 @@ public class AvaliacaoDao {
 									throws SQLException {
 								Avaliacao avaliacao = new Avaliacao();
 								avaliacao.setId(rs.getInt("id"));
+								avaliacao.setComentarioGeral(rs.getString("Comentario_Geral"));
+								avaliacao.setCriticaTecnica(rs.getString("Critica_Tecnica"));
 								avaliacao.setNotaConteudo(rs.getInt("Nota_Conteudo"));
 								avaliacao.setNotaInovacao(rs.getInt("Nota_Inovacao"));
 								avaliacao.setNotaApresentacao(rs.getInt("Nota_Apresentacao"));
@@ -63,6 +69,8 @@ public class AvaliacaoDao {
 	public void editarAvaliacao(int idAvaliacao, Avaliacao avaliacao){
 		jdbcTemplate.update(COMANDO_SQL_UPDATE,
 				idAvaliacao, avaliacao.getNotaConteudo(),
+				avaliacao.getComentarioGeral(),
+				avaliacao.getCriticaTecnica(),
 				avaliacao.getNotaInovacao(),
 				avaliacao.getNotaApresentacao(),
 				avaliacao.isRestricao());
