@@ -31,9 +31,9 @@ public class ApresentacaoDao {
 		jdbcTemplate.update(COMANDO_SQL_INSERT,
 				apresentacao.getTitulo(),
 				apresentacao.getResumo(),
-				apresentacao.getCategoria(),
+				apresentacao.getCategoria().name(),
 				apresentacao.getData(),
-				apresentacao.getSituacao());
+				apresentacao.getSituacao().name());
 	}
 	
 	/**
