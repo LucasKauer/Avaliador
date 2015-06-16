@@ -21,4 +21,8 @@ public class HomeController {
 		return "login";
 	}
 	
+	@RequestMapping(value = "/cadastrar-usuario", method = RequestMethod.GET)
+	public String cadastrarusuario(Model model, HttpSession session) {
+		return "cadastrar-usuario";
+	}
 }
