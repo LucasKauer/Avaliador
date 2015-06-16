@@ -1,0 +1,34 @@
+<html>
+	<head>
+		{{> head}}
+	</head>
+	<body>
+		{{> nav}}
+		<header id="top" class="header">
+			<table class="table table-condensed">
+				<thead>
+					<tr class="success">
+						<th>Id</th>
+						<th>Título</th>
+						<th>Resumo</th>
+						<th>Categoria</th>	
+						<th>Data</th>
+						<th>Situacao</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#apresentacao}}
+					<tr>
+						<td class="active">{{id}}</td>
+						<td class="active">{{titulo}}</td>
+						<td class="active">{{resumo}}</td>
+						<td class="active">{{categoria.descricao}}</td>
+						<td class="active">{{data}}</td>
+						<td class="active">{{situacao.descricao}}</td>
+					</tr>
+					{{/apresentacao}}
+				</tbody>
+			</table>
+		</header>
+	</body>
+</html>
