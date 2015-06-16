@@ -30,7 +30,7 @@ public class AutorDao {
 	 * Adiciona um autor no banco
 	 * @param autor Autor a ser inserida no banco
 	 */
-	public void inserirAutor(Autor autor) {
+	public void inseriAutor(Autor autor) {
 		List<Autor> autores = verificaAutor(autor.getId(), autor.getNome());
 		if (autores.size() == 0) {
 			jdbcTemplate.update(COMANDO_SQL_INSERT,
