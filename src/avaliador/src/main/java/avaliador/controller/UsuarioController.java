@@ -16,7 +16,7 @@ import avaliador.model.Usuario;
 public class UsuarioController {
 	
 	@Inject
-	UsuarioDao dao;
+	UsuarioDao usuarioDao;
 	
 	@RequestMapping(value = "/entrar", method = RequestMethod.GET)
 	public String entrar(Model model, HttpSession session) {
@@ -24,16 +24,17 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "/valida", method = RequestMethod.POST)
-	public String validarUsuario(Usuario usuarioRecebido) {
-		Usuario usuarioRetornado = dao.validarUsuario(usuarioRecebido.getLogin(), usuarioRecebido.getSenha());
-		if(usuarioRetornado!=null){
+	public String validarUsuario(Usuario usuarioRecebido, HttpSession session) {
+		Usuario usuarioRetornado = usuarioDao.validarUsuario(usuarioRecebido.getLogin(), usuarioRecebido.getSenha());
+		if(usuarioRetornado != null) {
 			if (usuarioRetornado.getTipoUsuario() == NivelUsuario.ADMINISTRADOR){
+				session.setAttribute("ehAdministrador", true);
+				return "";
+			} else {
+				session.setAttribute("usuarioLogado", true);
 				return "";
 			}
-			else{
-				return "";
-			}
-		}else{
+		} else {
 			return "login";
 		}
 	}

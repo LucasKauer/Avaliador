@@ -51,4 +51,5 @@ public class UsuarioDao {
 		
 		return usuariosEncontrados.isEmpty() ? null : usuariosEncontrados.get(0); 
 	}
+	
 }

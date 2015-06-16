@@ -39,7 +39,7 @@ public class ApresentacaoController {
 	@RequestMapping(value = "/salvar-apresentacao", method = RequestMethod.POST)
 	public String salvaApresentacao(Apresentacao apresentacao) {
         apresentacaoDao.inserirApresentacao(apresentacao);
-        for (Autor autor : apresentacao.getAutores()) {
+        for (Autor autor : apresentacao.getAutor()) {
             autor.setApresentacao(apresentacao);
             autor.setGenero("M");
             autorDao.inseriAutor(autor);
