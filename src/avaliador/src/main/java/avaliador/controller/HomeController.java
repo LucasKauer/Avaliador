@@ -20,5 +20,10 @@ public class HomeController {
 	public String entrar(Model model, HttpSession session) {
 		return "login";
 	}
+	
+	@RequestMapping(value = "/cadastro-apresentacao", method = RequestMethod.GET)
+	public String cadastrarApresentacao(Model model, HttpSession session) {
+		return "cadastro-apresentacao";
+	}
 
 }

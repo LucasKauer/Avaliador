@@ -1,0 +1,80 @@
+<html>
+	<head>
+		{{> head}}
+		<style>
+			.text-vertical-center {
+				display: table-cell;
+				text-align: center;
+				vertical-align: middle;
+			}
+
+			.text-vertical-center h1 {
+				margin: 0;
+				padding: 0;
+				font-size: 4.5em;
+				font-weight: 700;
+			}
+			
+			.header {
+				display: table;
+				position: relative;
+				width: 100%;
+				height: 100%;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				background-size: cover;
+				-o-background-size: cover;
+			}
+			
+			.divformulario{
+				height:80px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		{{> nav}}
+		<header id="top" class="header">
+			<div class="text-vertical-center">
+				<form action="/salvar-apresentacao" method="post">
+					<div class="divformulario">
+						<label>Titulo:</label>
+						<input name="titulo" type="text" class="form-control" placeholder="Avaliador" required></input>
+						
+					</div>
+					
+					<div class="divformulario">
+						<label>Resumo:</label>
+						<textarea name="titulo" type="text" class="form-control" placeholder="O Avaliador eh um dos TC do Crescer" rows="5" required></textarea>
+					</div>
+					<br></br><br></br>
+					<div class="divformulario">
+						<label>Categoria:</label>
+						<select name="categoria" class="form-control" required>
+							<option value="a">Categoria A</option>
+							<option value="b">Categoria B</option>
+						</select>
+					</div>
+				
+					<div class="divformulario">
+						<label>Data:</label>
+						<input name="data" type="datetime" class="form-control" placeholder="19/07/2015 13:30:00" required>
+					</div>
+					
+					<div class="divformulario">
+						<label>Situacao:</label>
+						<select name="situacao" class="form-control" required>
+							<option value="agendada">Agendada</option>
+							<option value="avaliada">Avaliada</option>
+							<option value="cancelada">Cancelada</option>
+						</select>
+					</div>
+					
+					<div class="divformulario">
+						<input class="btn btn-primary btn-lg btn-block" type="submit" required value="Cadastrar">
+					</div>
+				</form>
+			</div>
+		</header>
+	</body>
+</html>
