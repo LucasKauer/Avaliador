@@ -1,0 +1,97 @@
+<html>
+	<head>
+		{{> head}}
+		<style>
+			.text-vertical-center {
+				display: table-cell;
+				text-align: center;
+				vertical-align: middle;
+			}
+
+			.text-vertical-center h1 {
+				margin: 0;
+				padding: 0;
+				font-size: 4.5em;
+				font-weight: 700;
+			}
+			
+			.header {
+				display: table;
+				position: relative;
+				width: 100%;
+				height: 100%;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				background-size: cover;
+				-o-background-size: cover;
+			}
+			
+			.divformulario{
+				height:80px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		{{> nav}}
+		<header id="top" class="header">
+			<div class="text-vertical-center">
+				<form action="/salvar-avaliacao" method="post">
+					<div class="divformulario">
+						<label>Comentario Geral:</label>
+						<textarea name="comentarioGeral" type="text" class="form-control" rows="5" required></textarea>
+					</div>
+					<br></br><br></br>
+					<div class="divformulario">
+						<label>Crítica Técnica:</label>
+						<textarea name="criticaTecnica" type="text" class="form-control" rows="5" required></textarea>
+					</div>
+					<br></br><br></br>
+					<div class="divformulario">
+						<label>Nota Conteúdo:</label>
+						<select name="notaConteudo" class="form-control" required>
+							<option value="1">1</option> 
+							<option value="2">2</option> 
+							<option value="3">3</option> 
+							<option value="4">4</option> 
+							<option value="5">5</option> 
+						</select>	
+					</div>
+					
+					<div class="divformulario">
+						<label>Nota Inovação:</label>
+						<select name="notaInovacao" class="form-control" required>
+							<option value="1">1</option> 
+							<option value="2">2</option> 
+							<option value="3">3</option> 
+							<option value="4">4</option> 
+							<option value="5">5</option> 
+						</select>	
+					</div>
+					<br></br><br></br>
+					<div class="divformulario">
+						<label>Nota Aresentação:</label>
+						<select name="notaApresentacao" class="form-control" required>
+							<option value="1">1</option> 
+							<option value="2">2</option> 
+							<option value="3">3</option> 
+							<option value="4">4</option> 
+							<option value="5">5</option> 
+						</select>	
+					</div>
+					<div class="divformulario">
+						<label>Restrição:</label>
+						<select name="situacao" class="form-control" required>
+							<option value="true">Sim</option>
+							<option value="false">Não</option> 
+						</select>
+					</div>
+					
+					<div class="divformulario">
+						<input class="btn btn-primary btn-lg btn-block" type="submit" value="Cadastrar">
+					</div>
+				</form>
+			</div>
+		</header>
+	</body>
+</html>
