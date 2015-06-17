@@ -34,8 +34,8 @@ public class UsuarioDao {
 				usuario.getTipoUsuario());
 	}
 	
-	//Valida o usuario quando ele faz o login
-	public Usuario validarUsuario(String login, String senha){
+	// Valida o usuario quando ele faz o login
+	public Usuario validarUsuario(String login, String senha) {
 		List<Usuario> usuariosEncontrados = jdbcTemplate.query(COMANDO_SQL_SELECT_USUARIO, new RowMapper<Usuario>(){
 			
 			@Override
@@ -50,6 +50,5 @@ public class UsuarioDao {
 		}, login, senha);
 		
 		return usuariosEncontrados.isEmpty() ? null : usuariosEncontrados.get(0); 
-	}
-	
+	}	
 }

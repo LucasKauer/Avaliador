@@ -23,24 +23,21 @@ public class UsuarioController {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/valida", method = RequestMethod.POST)
-	public String validarUsuario(Usuario usuarioRecebido, HttpSession session) {
+	@RequestMapping(value = "/autenticar-usuario", method = RequestMethod.POST)
+	public String autenticarUsuario(Usuario usuarioRecebido, HttpSession session) {
 		Usuario usuarioRetornado = usuarioDao.validarUsuario(usuarioRecebido.getLogin(), usuarioRecebido.getSenha());
 		if(usuarioRetornado != null) {
-			if (usuarioRetornado.getTipoUsuario() == NivelUsuario.ADMINISTRADOR){
+			session.setAttribute("usuarioLogado", true);	
+			if (usuarioRetornado.getTipoUsuario() == NivelUsuario.ADMINISTRADOR) {
 				session.setAttribute("ehAdministrador", true);
-				return "";
-			} else {
-				session.setAttribute("usuarioLogado", true);
-				return "";
 			}
-		} else {
-			return "login";
-		}
+			return "redirect:/index";
+		}	
+		return "login";
 	}
 	
 	@RequestMapping(value = "/cadastrar-usuario", method = RequestMethod.GET)
-	public String cadastrarusuario(Model model, HttpSession session) {
+	public String cadastrarUsuario(Model model, HttpSession session) {
 		return "cadastrar-usuario";
 	}
 }
