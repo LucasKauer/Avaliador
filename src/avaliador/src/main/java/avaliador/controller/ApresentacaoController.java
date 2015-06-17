@@ -41,7 +41,6 @@ public class ApresentacaoController {
         apresentacaoDao.inserirApresentacao(apresentacao);
         for (Autor autor : apresentacao.getAutor()) {
             autor.setApresentacao(apresentacao);
-            autor.setGenero("M");
             autorDao.inseriAutor(autor);
         }
 
