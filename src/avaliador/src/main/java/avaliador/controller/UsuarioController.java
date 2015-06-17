@@ -27,9 +27,9 @@ public class UsuarioController {
 	public String autenticarUsuario(Usuario usuarioRecebido, HttpSession session) {
 		Usuario usuarioRetornado = usuarioDao.validarUsuario(usuarioRecebido.getLogin(), usuarioRecebido.getSenha());
 		if(usuarioRetornado != null) {
-			session.setAttribute("usuarioLogado", true);	
+			session.setAttribute("usuarioLogado", usuarioRetornado);	
 			if (usuarioRetornado.getTipoUsuario() == NivelUsuario.ADMINISTRADOR) {
-				session.setAttribute("ehAdministrador", true);
+				session.setAttribute("ehAdministrador", usuarioRetornado);
 			}
 			return "redirect:/index";
 		}	
@@ -40,4 +40,5 @@ public class UsuarioController {
 	public String cadastrarUsuario(Model model, HttpSession session) {
 		return "cadastrar-usuario";
 	}
+
 }

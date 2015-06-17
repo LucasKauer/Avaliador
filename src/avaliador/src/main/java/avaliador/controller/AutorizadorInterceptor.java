@@ -28,7 +28,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}
 		
-		response.sendRedirect("/");
+		response.sendRedirect("/entrar");
 		return false;
 	}
 }
