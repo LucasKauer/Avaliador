@@ -11,6 +11,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import avaliador.model.Avaliacao;
+import avaliador.model.Categoria;
+import avaliador.model.Situacao;
 
 @Component
 public class AvaliacaoDao {
@@ -23,6 +25,8 @@ public class AvaliacaoDao {
 	private final String COMANDO_SQL_DELETE = "DELETE FROM AVALIACAO WHERE Id_Avaliacao = ?";
 	private final String COMANDO_SQL_SELECT = "SELECT Id_Avaliacao, Comentario_Geral, Critica_Tecnica, Nota_Conteudo, Nota_Inovacao, Nota_Apresentacao, Restricao FROM AVALIACAO";
 	
+	private static final String COMANDO_SQL_BUSCA_AVALIACAO = "SELECT Nota_Conteudo, Nota_Inovacao, Nota_Apresentacao, Avaliador_Id FROM Avaliacao WHERE Apresentacao_Id = ";
+
 	/**
 	*  Adiciona Avaliacao no banco
 	* @param avaliacao Avaliacao a ser inserida no banco
@@ -84,4 +88,22 @@ public class AvaliacaoDao {
 		jdbcTemplate.update(COMANDO_SQL_DELETE,
 				idAvalicao);
 	}
+	
+	public List<Avaliacao> buscaAvaliacaoPassandoIdApresentacao(int idApresentacao) {
+		List<Avaliacao> avaliacoes = jdbcTemplate.query(COMANDO_SQL_BUSCA_AVALIACAO + idApresentacao, (ResultSet results,
+				int rowNum) -> {
+					
+			Avaliacao avaliacao = new Avaliacao();
+			
+			avaliacao.setNotaApresentacao(results.getInt("Nota_Apresentacao"));
+			avaliacao.setNotaConteudo(results.getInt("Nota_Conteudo"));
+			avaliacao.setNotaInovacao(results.getInt("Nota_Inovacao"));
+			avaliacao.setAvaliadorId(results.getInt("Avaliador_Id"));
+			
+			return avaliacao;
+		});		
+		
+		return avaliacoes;
+	}
+
 }
