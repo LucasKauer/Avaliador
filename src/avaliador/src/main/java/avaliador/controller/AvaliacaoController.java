@@ -23,7 +23,7 @@ public class AvaliacaoController {
 	@RequestMapping(value = "/cadastro-avaliacao", method = RequestMethod.GET)
 	public String cadastrarAvaliacao(Model model) {
 		model.addAttribute("listaApresentacoes", apresentacaoDao.consultaApresentacoes());
-		return "cadastro-avaliacao";
+		return "cadastroAvaliacao";
 	}
 	
 	@RequestMapping(value = "/salvar-avaliacao", method = RequestMethod.POST)
@@ -35,6 +35,6 @@ public class AvaliacaoController {
 	@RequestMapping(value = "/busca-avaliacao", method = RequestMethod.POST)
 	public String buscaAvaliacao(int idApresentacao) {
 		avaliacaoDao.buscaAvaliacaoPassandoIdApresentacao(idApresentacao);
-		return "cadastro-avaliacao";
+		return "cadastroAvaliacao";
 	}
 }
