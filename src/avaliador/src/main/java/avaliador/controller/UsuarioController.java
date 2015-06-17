@@ -26,7 +26,8 @@ public class UsuarioController {
 	@RequestMapping(value = "/autenticar-usuario", method = RequestMethod.POST)
 	public String autenticarUsuario(HttpSession session, Model model, Usuario usuarioRecebido) {
 		Usuario usuarioRetornado = usuarioDao.validarUsuario(usuarioRecebido.getLogin(), usuarioRecebido.getSenha());
-		if(usuarioRetornado != null) {	
+		if(usuarioRetornado != null) {
+			session.setAttribute("usuarioLogado", usuarioRetornado);
 			if (usuarioRetornado.getTipoUsuario() == NivelUsuario.ADMINISTRADOR) {
 				session.setAttribute("ehAdministrador", usuarioRetornado);
 				model.addAttribute("botaoSair", true);
