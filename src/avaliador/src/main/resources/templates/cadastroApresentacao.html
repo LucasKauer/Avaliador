@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE>
+<html>
 <head>
-     {{> headLogado}}
+     {{>headLogado}}
     <style>
         .titulo{
             color: #575757;   
@@ -36,58 +36,78 @@
             margin-top: 5vh;   
         }
     </style>
+    <script>
+        function adicionarAutor(){
+            var numeroAutorAtual = $('.nome-autor').size();
+            var nomeAutor = $('#nomeAutor').val();
+            var emailAutor = $('#emailAutor').val();
+
+            var htmlInputNome = '<input type="text" class="selecionador nome-autor" name="autor['  + numeroAutorAtual + '].nome" value="' + nomeAutor + '">';
+            var htmlInputEmail = '<input type="text" class="selecionador" name="autor['  + numeroAutorAtual + '].email" value="' + emailAutor + '">';
+                $('#formSalvarApresentacao').append(htmlInputNome);
+                $('#formSalvarApresentacao').append(htmlInputEmail);
+
+                // Limpa os campos
+                $('#nomeAutor').val('');
+                $('#emailAutor').val('');
+            }
+    </script>
 </head>
+    <body>
+        <div id="wrapper">
+            {{>navLogado}}
+            <div id="page-wrapper" style="min-height: 94vh;">
+                <h2 class="titulo">Cadastro de Apresentacao</h2>
+                <div class="formulator">
+                    <form id="formSalvarApresentacao" action="/salvar-apresentacao" method="post">
+                        <div class="form-group">
+                            <label>Titulo da Apresentacao</label>
+                            <input name="titulo" class="entradas" placeholder="Informe o titulo da apresentacao" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Resumo</label>
+                            <textarea name="resumo" class="entradas" rows="5" placeholder="Redija um resumo da apresentacao" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select name="categoria" class="selecionador" required>
+    							{{#categoria}}
+    								<option value="{{.}}">{{descricao}}</option> 
+    							{{/categoria}}
+    						</select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data">Data</label>
+                            <input name="data" type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Situacao</label>
+                            <select name="situacao" class="selecionador" required>
+    							{{#situacao}}
+    								<option value="{{.}}">{{descricao}}</option> 
+    							{{/situacao}}
+    						</select>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Cadastrar</button>  
+                    </form>
 
-<body>
-
-    <div id="wrapper">
-        {{> navLogado}}
-
-        <div id="page-wrapper" style="min-height: 94vh;">
-            <h2 class="titulo">Cadastro de Apresentação</h2>
-            
-            <div class="formulator">
-                <form id="formulario" name="formulario" class="entradas" action="#" method="post">
+                    <h2 class="titulo">Cadastro de Autor</h2>
                     <div class="form-group">
-                        <label for="titulo">Título da Apresentação</label>
-                        <input name="titulo" id="titulo" class="entradas" placeholder="Informe o título da apresentação" required>
+                        <label>Nome</label>
+                        <input id="nomeAutor" type="text" class="entradas" required>
                     </div>
                     <div class="form-group">
-                        <label for="resumo">Resumo</label>
-                        <textarea name="sinopse" id="sinopse" class="entradas" rows="2" cols="15" placeholder="Redija um resumo da apresentação" maxlength="4000" required></textarea>
+                        <label>Email</label>
+                        <input id="emailAutor" type="text" class="entradas"required>
                     </div>
-                    <div class="form-group">
-                        <label for="categoria">Categoria</label>
-                        <select name="categoria" id="categoria" class="selecionador" required>
-							{{#categoria}}
-								<option value="{{.}}">{{descricao}}</option> 
-							{{/categoria}}
-						</select>
-                    </div>
-                    <div class="form-group">
-                        <label for="data">Data</label>
-                        <input type="date" name="data" id="data" required>
-                    </div>
-                    
-                     <div class="form-group">
-                        <label for="situacao">Situação</label>
-                        <select name="situacao" id="situacao" class="selecionador" required>
-							{{#situacao}}
-								<option value="{{.}}">{{descricao}}</option> 
-							{{/situacao}}
-						</select>
-                    </div>
-                    <button class="btn btn-primary">Cadastrar</button>
-                </form>
+                    <button class="btn btn-success" onclick="adicionarAutor()">Adicionar Autor</button> 
+                </div>
             </div>
         </div>
-    </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
-
-</body>
-
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/plugins/morris/raphael.min.js"></script>
+        <script src="js/plugins/morris/morris.min.js"></script>
+        <script src="js/plugins/morris/morris-data.js"></script>
+    </body>
 </html>
