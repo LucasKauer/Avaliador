@@ -11,5 +11,9 @@
 }
             
 .login-form .btn{
-    border-radius: 300px;   
+    border-radius: 3px;   
+}
+
+.btn-dir{
+    margin-left: 10px;   
 }
