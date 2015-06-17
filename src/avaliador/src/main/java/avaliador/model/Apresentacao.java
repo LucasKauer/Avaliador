@@ -2,8 +2,7 @@ package avaliador.model;
 
 import java.util.Date;
 import java.util.List;
-//import java.util.List;
-import java.util.List;
+
 
 public class Apresentacao extends Entidade {
 	private String titulo;
