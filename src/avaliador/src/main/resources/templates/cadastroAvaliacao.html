@@ -92,6 +92,14 @@
                 <div class="formulator">
                     <form id="formulario" name="formulario" action="#" method="post">
                         <div class="form-group">
+                            {{#listaApresentacao}}
+                            <label for="apresentacao">Apresentação</label>
+                            <select name="apresentacao" id="apresentacao" class="entrada" required>
+                                <option value="{{id}}">{{titulo}}</option>  
+                            </select>
+                            {{/listaApresentacao}}
+                        </div>    
+                        <div class="form-group">
                             <label for="comentarioGeral">Comentário Geral</label>
                             <textarea name="comentarioGeral" id="comentarioGeral" class="entrada" rows="2" cols="15" placeholder="O que você achou da apresentação?" maxlength="4000" required></textarea>
                         </div>
