@@ -24,21 +24,33 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "/autenticar-usuario", method = RequestMethod.POST)
-	public String autenticarUsuario(Usuario usuarioRecebido, HttpSession session) {
+	public String autenticarUsuario(HttpSession session, Model model, Usuario usuarioRecebido) {
 		Usuario usuarioRetornado = usuarioDao.validarUsuario(usuarioRecebido.getLogin(), usuarioRecebido.getSenha());
-		if(usuarioRetornado != null) {
-			session.setAttribute("usuarioLogado", usuarioRetornado);	
+		if(usuarioRetornado != null) {	
 			if (usuarioRetornado.getTipoUsuario() == NivelUsuario.ADMINISTRADOR) {
 				session.setAttribute("ehAdministrador", usuarioRetornado);
+				model.addAttribute("botaoSair", true);
+				return "redirect:/index";
 			}
-			return "redirect:/index";
-		}	
+			return "login";
+		}
 		return "login";
+	}
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String telaIndex() {
+		return "index";
 	}
 	
 	@RequestMapping(value = "/cadastrar-usuario", method = RequestMethod.GET)
 	public String cadastrarUsuario(Model model, HttpSession session) {
 		return "cadastrar-usuario";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "/";
 	}
 
 }

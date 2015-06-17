@@ -12,9 +12,9 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 		String uri = request.getRequestURI();
 		if (uri.endsWith("/") ||
-			uri.endsWith("/entrar") || // metodo que chama a tela de login
-			uri.endsWith("/cadastrar-usuario") || // metodo que chama a tela de cadastro de usuario
-			uri.endsWith("/autenticar-usuario") || // metodo que autentica o usuario no sistema
+			uri.endsWith("entrar") || // metodo que chama a tela de login
+            uri.endsWith("cadastrar-usuario") || // metodo que cadastra o usuario no sistema
+			uri.endsWith("autenticar-usuario") || // metodo que chama a tela de cadastro de usuario
 			uri.endsWith("head") || // view que contem o HEAD padrao
 			uri.endsWith("nav") || // view que contem a NAV padrao
 			uri.endsWith("scripts") || // view que contem os scripts padrao

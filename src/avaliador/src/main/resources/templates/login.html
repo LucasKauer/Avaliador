@@ -7,16 +7,16 @@
 	<body class="login-img3-body">
 		{{> nav}}
 		<div class="container">
-			<form class="login-form" action="/autenticar-usuario"> 
+			<form class="login-form" action="/autenticar-usuario" method="post"> 
 				<div class="login-wrap">
 					<p class="login-img"><img src="img/lock.png" width="40"></p>
 					<div class="input-group">
 						<span class="input-group-addon"></span>
-						<input type="text" class="form-control" name="login" placeholder="Nome de Usuário" autofocus required>
+						<input name="login" type="text" class="form-control" placeholder="Nome de Usuário" autofocus required>
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon"></span>
-						<input type="password" class="form-control" placeholder="Senha" name="senha" required>
+						<input name="senha" type="password" class="form-control" placeholder="Senha" required>
 					</div>
 					<label class="checkbox">
                         <input type="checkbox" value="lembre-me">Lembre-me

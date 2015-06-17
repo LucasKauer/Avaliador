@@ -23,7 +23,7 @@ public class UsuarioDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	private static final String COMANDO_SQL_INSERT_USUARIO = "INSERT INTO Usuario (Login, Senha, Nivel_Usuario) VALUES (?, ?, ?)";
-	private static final String COMANDO_SQL_SELECT_USUARIO = "SELECT Id_Usuario, Login, Senha, Nivel_Usuario FROM avaliador_db.usuario WHERE Login = ? AND Senha = ?";
+	private static final String COMANDO_SQL_SELECT_USUARIO = "SELECT Id_Usuario, Login, Senha, Nivel_Usuario FROM Usuario WHERE Login = ? AND Senha = ?";
 	
 	// Adiciona um usuario no banco
 	public void inserirUsuario(Usuario usuario) throws DataAccessException, NoSuchAlgorithmException, InvalidKeySpecException {
