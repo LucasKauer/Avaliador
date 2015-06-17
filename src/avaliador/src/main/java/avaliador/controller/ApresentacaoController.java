@@ -44,12 +44,12 @@ public class ApresentacaoController {
             autorDao.inseriAutor(autor);
         }
 
-		return "redirect:/lista-apresentacao";
+		return "redirect:/listaApresentacao";
 	}
 	
 	@RequestMapping(value = "/lista-apresentacao", method = RequestMethod.GET)
 	public String listarApresentacao(Model model) {
 		model.addAttribute("apresentacao", apresentacaoDao.consultaApresentacoes());
-		return "lista-apresentacao";
+		return "listaApresentacao";
 	}
 }
