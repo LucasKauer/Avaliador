@@ -7,7 +7,15 @@ public class Avaliacao extends Entidade {
 	private int notaInovacao;
 	private int notaApresentacao;
 	private boolean restricao;
+	
+	// FK
+	private int avaliadorId;
+	private int apresentacaoId;
 
+	public Avaliacao() {
+		
+	}
+	
 	public int getNotaConteudo() {
 		return notaConteudo;
 	}
@@ -54,5 +62,21 @@ public class Avaliacao extends Entidade {
 
 	public void setCriticaTecnica(String criticaTecnica) {
 		this.criticaTecnica = criticaTecnica;
+	}
+
+	public int getAvaliadorId() {
+		return avaliadorId;
+	}
+
+	public void setAvaliadorId(int avaliadorId) {
+		this.avaliadorId = avaliadorId;
+	}
+
+	public int getApresentacaoId() {
+		return apresentacaoId;
+	}
+
+	public void setApresentacaoId(int apresentacaoId) {
+		this.apresentacaoId = apresentacaoId;
 	}
 }
