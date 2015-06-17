@@ -36,10 +36,6 @@
             margin-top: 5vh;   
         }
         
-        .btn-autores{
-            margin-bottom: 50px;
-        }
-        
         .modal-content{
             height: 34vh;   
         }
@@ -91,7 +87,30 @@
         p{
             margin-bottom: 20px;
         }
+        
+        .btn-autores{
+            display: block;
+            width: 140px;
+        }
     </style>
+    <script>
+        function adicionarAutor(){
+            var numeroAutorAtual = $('.nome-autor').size();
+            var nomeAutor = $('#nomeAutor').val();
+            var emailAutor = $('#emailAutor').val();
+
+           var htmlInputNome = '<input type="text" class="selecionador nome-autor bloqueado" name="autor['  + numeroAutorAtual + '].nome" value="' + nomeAutor + '" readonly="readonly">';
+            var htmlInputEmail = '<input type="hidden" class="selecionador bloqueado" name="autor['  + numeroAutorAtual + '].email" value="' + emailAutor + '" readonly="readonly">';
+                $('#cadAutor').after(htmlInputEmail);
+                $('#cadAutor').after(htmlInputNome);
+                $('#cadAutor').after('<strong>Autor</strong>');
+                $('#cadAutor').after('<p>');
+                
+                // Limpa os campos
+                $('#nomeAutor').val('');
+                $('#emailAutor').val('');
+            }
+    </script>
 </head>
     <body>
         <div id="wrapper">
@@ -128,6 +147,9 @@
     							{{/situacao}}
     						</select>
                         </div>
+                        <a href="#myModal" class="btn btn-default btn-autores" id="cadAutor" data-toggle="modal">Cadastrar Autores</a>
+                        <button class="btn btn-primary" type="submit">Cadastrar</button>  
+                    </form>
 
                     <!--h2 class="titulo">Cadastro de Autor</h2>
                     <div class="form-group">
@@ -139,11 +161,7 @@
                         <input id="emailAutor" type="text" class="entradas"required>
                     </div>
                     <button class="btn btn-success" onclick="adicionarAutor()">Adicionar Autor</button--> 
-               
-                <div class="bs-example">
-                    <!-- Button HTML (to Trigger Modal) -->
-                    <a href="#myModal" class="btn btn-default btn-autores" id"cadAutor" data-toggle="modal">Cadastrar Autores</a>
-                    <!-- Modal HTML -->
+                    <div class="cadastroDeAutor">
                     <div id="myModal" class="modal fade">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -154,7 +172,7 @@
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label>Nome</label>
-                                        <input id="nomeAutor" name="nomeAutor" type="text" class="entradas" required>
+                                        <input id="nomeAutor" name="nomeAutor" type="text" class="entradas" required="required">
                                     </div>
                                     <div class="form-group">
                                         <label>Email</label>
@@ -169,36 +187,12 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary" type="submit">Cadastrar</button>  
-                </form>
             </div>
         </div>
-     </div>
-        <script>
-        function adicionarAutor(){
-            var numeroAutorAtual = $('.nome-autor').size();
-            var nomeAutor = $('#nomeAutor').val();
-            var emailAutor = $('#emailAutor').val();
-
-            
-            var htmlInputNome = '<input type="text" class="selecionador nome-autor bloqueado" name="autor['  + numeroAutorAtual + '].nome" value="' + nomeAutor + '" disabled>';
-            var htmlInputEmail = '<input type="hidden" class="selecionador bloqueado" name="autor['  + numeroAutorAtual + '].email" value="' + emailAutor + '" disabled>';
-                $('.bs-example').append('<p>');
-                $('.bs-example').append('<strong>Autor</strong>');
-                $('.bs-example').append(htmlInputNome);
-                $('.bs-example').append(htmlInputEmail);
-                
-
-                // Limpa os campos
-                $('#nomeAutor').val('');
-                $('#emailAutor').val('');
-            }
-    </script>
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/plugins/morris/raphael.min.js"></script>
         <script src="js/plugins/morris/morris.min.js"></script>
         <script src="js/plugins/morris/morris-data.js"></script>
-        
     </body>
 </html>
