@@ -1,0 +1,65 @@
+<html>
+	<head>
+		{{> headLogado}}
+        <style>
+            .titulo{
+                 color: #575757;  
+            }
+            
+            table{ 
+                width: 100%;
+                text-align: center;
+            }
+            
+            th{
+                background-color: #AAAAAA; 
+                text-align: center;
+                border: 1px solid #444444;
+            }
+            
+            td{
+                min-width: 30px;
+                max-width: 200px;
+                word-wrap: break-word;
+                overflow: scroll;
+                border: 1px solid #444444;
+                border-radius: 50px;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="wrapper">
+            {{> navLogado}}
+            <div id="page-wrapper" style="min-height: 94vh;"> 
+                <h2 class="titulo">Lista de Apresentações</h2>
+                    <table class="tabelosa">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Título</th>
+                                <th>Resumo</th>
+                                <th>Categoria</th>	
+                                <th>Data</th>
+                                <th>Situacao</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                              {{#apresentacao}}
+                            <tr>
+                                <td class="active">{{id}}</td>
+                                <td class="active">{{titulo}}</td>
+                                <td class="active">{{resumo}}</td>
+                                <td class="active">{{categoria.descricao}}</td>
+                                <td class="active">{{data}}</td>
+                                <td class="active">{{situacao.descricao}}</td>
+                                <td><a href="#">[Editar]</a> <a href="#">[Excluir]</a></td>
+                            </tr>
+                            {{/apresentacao}}
+                        </tbody>
+                    </table>
+                </header>
+            </div>
+        </div>
+	</body>
+</html>
