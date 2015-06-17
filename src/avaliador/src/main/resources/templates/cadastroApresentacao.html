@@ -13,20 +13,27 @@
         
         .formulator input{
             display: block;
-            height: 50px;
+            height: 40px;
             width: 80vw;
         }
         
         .formulator textarea{
             display: block;
-            height: 50px;
-            width: 80vw;
+            height: 40px;
+            min-width: 80vw;
+            max-width: 80vw;
+            min-height: 50px;
+            max-height: 300px;
         }
         
         .selecionador{
             display: block;
-            height: 50px;
+            height: 40px;
             width: 80vw;
+        }
+        
+        .formulator button{
+            margin-top: 5vh;   
         }
     </style>
 </head>
@@ -41,36 +48,36 @@
             
             <div class="formulator">
                 <form id="formulario" name="formulario" class="entradas" action="#" method="post">
-                    <p>
+                    <div class="form-group">
                         <label for="titulo">Título da Apresentação</label>
                         <input name="titulo" id="titulo" class="entradas" placeholder="Informe o título da apresentação" required>
-                    </p>
-                    <p>
+                    </div>
+                    <div class="form-group">
                         <label for="resumo">Resumo</label>
                         <textarea name="sinopse" id="sinopse" class="entradas" rows="2" cols="15" placeholder="Redija um resumo da apresentação" maxlength="4000" required></textarea>
-                    </p>
-                    <p>
+                    </div>
+                    <div class="form-group">
                         <label for="categoria">Categoria</label>
                         <select name="categoria" id="categoria" class="selecionador" required>
 							{{#categoria}}
 								<option value="{{.}}">{{descricao}}</option> 
 							{{/categoria}}
 						</select>
-                    </p>
-                    <p>
+                    </div>
+                    <div class="form-group">
                         <label for="data">Data</label>
                         <input type="date" name="data" id="data" required>
-                    </p>
+                    </div>
                     
-                     <p>
+                     <div class="form-group">
                         <label for="situacao">Situação</label>
                         <select name="situacao" id="situacao" class="selecionador" required>
 							{{#situacao}}
 								<option value="{{.}}">{{descricao}}</option> 
 							{{/situacao}}
 						</select>
-                    </p>
-                    <button class="btn">Cadastrar</button>
+                    </div>
+                    <button class="btn btn-primary">Cadastrar</button>
                 </form>
             </div>
         </div>
