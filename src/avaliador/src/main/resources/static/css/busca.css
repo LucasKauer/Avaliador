@@ -1,0 +1,19 @@
+.table{
+    color: #34495E;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 5px; !important;
+}
+
+.table > thead > tr.success > th, .table > thead > tr > td.success, .table > thead > tr > th.success{
+    color: white;
+    background-color: rgba(52, 73, 94, 0.8); !important;
+}
+
+.table > tbody > tr.active > td, .table > tbody > tr.active > th, .table > tbody > tr > td.active, .table > tbody > tr > th.active, .table > tfoot > tr.active > td, .table > tfoot > tr.active > th, .table > tfoot > tr > td.active, .table > tfoot > tr > th.active, .table > thead > tr.active > td, .table > thead > tr.active > th, .table > thead > tr > td.active, .table > thead > tr > th.active{
+    background-color: rgba(255,255,255,0.8);
+}
+
+.esq{
+    width: 80%;
+}
