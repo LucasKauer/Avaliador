@@ -85,7 +85,7 @@
         }
         
         p{
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         
         .btn-autores{
@@ -94,12 +94,43 @@
         }
     </style>
     <script>
+        function validaEmail(email){
+            var arrei = email.split('@');
+
+            if(arrei.length != 2){
+              return false;
+            }else{
+              var subarrei = arrei[1].split('.');
+              if(subarrei.length < 2){
+                return false;
+              }
+            }
+            return true;
+        }
+        
+        function validator(nomeAutor, emailAutor){
+            if(nomeAutor == ""){
+                alert('Nome de autor inválido.');
+                return false;
+            }
+            
+            if(!validaEmail(emailAutor)){
+                alert('Email inválido.');
+                return false;
+            }
+            
+            return true;
+        }
+        
         function adicionarAutor(){
             var numeroAutorAtual = $('.nome-autor').size();
             var nomeAutor = $('#nomeAutor').val();
             var emailAutor = $('#emailAutor').val();
-
-           var htmlInputNome = '<input type="text" class="selecionador nome-autor bloqueado" name="autor['  + numeroAutorAtual + '].nome" value="' + nomeAutor + '" readonly="readonly">';
+            
+            var valida = validator(nomeAutor, emailAutor);
+            
+            if(valida){
+            var htmlInputNome = '<input type="text" class="selecionador nome-autor bloqueado" name="autor['  + numeroAutorAtual + '].nome" value="' + nomeAutor + '" readonly="readonly">';
             var htmlInputEmail = '<input type="hidden" class="selecionador bloqueado" name="autor['  + numeroAutorAtual + '].email" value="' + emailAutor + '" readonly="readonly">';
                 $('#cadAutor').after(htmlInputEmail);
                 $('#cadAutor').after(htmlInputNome);
@@ -110,6 +141,7 @@
                 $('#nomeAutor').val('');
                 $('#emailAutor').val('');
             }
+        }
     </script>
 </head>
     <body>
@@ -172,11 +204,11 @@
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label>Nome</label>
-                                        <input id="nomeAutor" name="nomeAutor" type="text" class="entradas" required="required">
+                                        <input id="nomeAutor" name="nomeAutor" type="text" class="entradas">
                                     </div>
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input id="emailAutor" name="emailAutor" type="email" class="entradas" required="required">
+                                        <input id="emailAutor" name="emailAutor" type="email" class="entradas">
                                     </div>
                                 </div>
                                 <div class="modal-footer">

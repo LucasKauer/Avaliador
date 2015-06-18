@@ -7,6 +7,7 @@ public class Avaliacao extends Entidade {
 	private int notaInovacao;
 	private int notaApresentacao;
 	private boolean restricao;
+	private double mediaFinal;
 	
 	// FK
 	private int avaliadorId;
@@ -78,5 +79,13 @@ public class Avaliacao extends Entidade {
 
 	public void setApresentacaoId(int apresentacaoId) {
 		this.apresentacaoId = apresentacaoId;
+	}
+		
+	public double getMediaFinal() {
+		return mediaFinal;
+	}
+
+	public void setMediaFinal(double mediaFinal) {
+		this.mediaFinal = mediaFinal;
 	}
 }
