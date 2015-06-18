@@ -31,6 +31,20 @@ public class HomeController {
 		return "index-teste";
 	}
 	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String homeLogado(Model model, HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		if(usuario != null) {
+			model.addAttribute("exibeAutenticacao", false);
+			model.addAttribute("exibeSair", true);
+			model.addAttribute("loginUsuario", session.getAttribute("usuarioLogado"));
+		} else {
+			model.addAttribute("exibeAutenticacao", true);
+			model.addAttribute("exibeSair", false);
+		}
+		return "home";
+	}
+	
 	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
 	public String buscar(Model model, Apresentacao apresentacao) {
 		model.addAttribute("resposta", apresentacaoDao.buscaHome(apresentacao.getTitulo()));

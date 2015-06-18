@@ -39,7 +39,7 @@ public class UsuarioController {
 			if (usuarioRetornado.getTipoUsuario() == NivelUsuario.ADMINISTRADOR) {
 				session.setAttribute("ehAdministrador", usuarioRetornado);
 			}
-			return "redirect:/";
+			return "redirect:/home";
 		}
 		return "login";
 	}
