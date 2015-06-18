@@ -17,3 +17,17 @@
 .btn-dir{
     margin-left: 10px;   
 }
+
+
+.input-group .form-control:first-child{
+    height: 70px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+            
+.input-group-btn:last-child > .btn{
+    height: 70px;
+    width: 100px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius:5px;        
+}
