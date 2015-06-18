@@ -20,6 +20,14 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "/entrar", method = RequestMethod.GET)
 	public String entrar(Model model, HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		if(usuario != null) {
+			model.addAttribute("exibeAutenticacao", false);
+			model.addAttribute("exibeSair", true);
+		} else {
+			model.addAttribute("exibeAutenticacao", true);
+			model.addAttribute("exibeSair", false);
+		}	
 		return "login";
 	}
 	
@@ -30,21 +38,22 @@ public class UsuarioController {
 			session.setAttribute("usuarioLogado", usuarioRetornado);
 			if (usuarioRetornado.getTipoUsuario() == NivelUsuario.ADMINISTRADOR) {
 				session.setAttribute("ehAdministrador", usuarioRetornado);
-				model.addAttribute("botaoSair", true);
-				return "redirect:/index";
 			}
-			return "login";
+			return "redirect:/";
 		}
 		return "login";
 	}
 	
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String telaIndex() {
-		return "index";
-	}
-	
 	@RequestMapping(value = "/cadastrar-usuario", method = RequestMethod.GET)
 	public String cadastrarUsuario(Model model, HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		if(usuario != null) {
+			model.addAttribute("exibeAutenticacao", false);
+			model.addAttribute("exibeSair", true);
+		} else {
+			model.addAttribute("exibeAutenticacao", true);
+			model.addAttribute("exibeSair", false);
+		}
 		return "cadastrar-usuario";
 	}
 	
@@ -53,5 +62,4 @@ public class UsuarioController {
 		session.invalidate();
 		return "/";
 	}
-
 }

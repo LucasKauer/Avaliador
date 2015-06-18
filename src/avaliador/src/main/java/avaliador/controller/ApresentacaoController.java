@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import avaliador.dao.AutorApresentacaoDao;
 import avaliador.dao.AutorDao;
 import avaliador.model.Autor;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import avaliador.dao.ApresentacaoDao;
 import avaliador.model.Apresentacao;
 import avaliador.model.Categoria;
 import avaliador.model.Situacao;
+import avaliador.model.Usuario;
 
 @Controller
 public class ApresentacaoController {
@@ -31,6 +33,7 @@ public class ApresentacaoController {
 	
 	@RequestMapping(value = "/cadastro-apresentacao", method = RequestMethod.GET)
 	public String cadastrarApresentacao(Model model, HttpSession session) {
+		model.addAttribute("loginUsuario", session.getAttribute("usuarioLogado"));
 		model.addAttribute("categoria", Categoria.values());
 		model.addAttribute("situacao", Situacao.values());
 		return "cadastroApresentacao";
@@ -48,7 +51,8 @@ public class ApresentacaoController {
 	}
 	
 	@RequestMapping(value = "/lista-apresentacao", method = RequestMethod.GET)
-	public String listarApresentacao(Model model) {
+	public String listarApresentacao(Model model, HttpSession session) {
+		model.addAttribute("loginUsuario", session.getAttribute("usuarioLogado"));
 		model.addAttribute("apresentacao", apresentacaoDao.consultaApresentacoes());
 		return "listaApresentacao";
 	}
