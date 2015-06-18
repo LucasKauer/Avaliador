@@ -44,7 +44,7 @@ public class ApresentacaoController {
             autorDao.inseriAutor(autor);
         }
 
-		return "redirect:/listaApresentacao";
+		return "redirect:/lista-apresentacao";
 	}
 	
 	@RequestMapping(value = "/lista-apresentacao", method = RequestMethod.GET)
