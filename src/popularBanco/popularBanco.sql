@@ -69,9 +69,3 @@ INSERT INTO Avaliacao (Id_Avaliacao, Comentario_Geral, Critica_Tecnica, Nota_Con
 (12, "Duis quis purus velit. Ut vehicula tincidunt purus et sodales. ", "Pellentesque risus nunc, vehicula eu nisl iaculis, fermentum posuere massa. Sed condimentum hendrerit venenatis.", 4, 1, 2, "false", 1, 4),
 (13, "Nunc volutpat fermentum molestie. Nulla facilisi.", "Nam eget lorem laoreet, pharetra mauris non, efficitur lectus. ", 3, 5, 4, "true", 6, 4),
 (14, "Nulla facilisi. Nunc ut tincidunt sapien, sed consectetur lectus. ", "Etiam dapibus est eget vestibulum lobortis. ", 4, 3, 5, "false", 7, 4);
-
-ALTER TABLE Autor ADD COLUMN Email VARCHAR (100) NOT NULL;
-
-ALTER TABLE Avaliacao DROP COLUMN Restricao;
-ALTER TABLE Avaliacao  ADD COLUMN Restricao BOOL DEFAULT FALSE;
-ALTER TABLE Autor DROP COLUMN Genero;
