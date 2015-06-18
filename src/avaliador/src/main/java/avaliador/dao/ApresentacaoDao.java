@@ -26,8 +26,8 @@ public class ApresentacaoDao {
 	private static final String COMANDO_SQL_UPDATE = "UPDATE Avaliacao SET Titulo = ?, Resumo = ?, Categoria = ?, Data = ?, Situacao = ?  WHERE Id_Apresentacao = ?";
 	private static final String COMANDO_SQL_DELETE = "DELETE FROM Apresentacao WHERE Id_Apresentacao = ?";
 	private static final String COMANDO_SQL_SELECT_BUSCA = "SELECT Titulo, Resumo FROM apresentacao WHERE Titulo LIKE ?";
-	private static final String COMANDO_SQL_SELECT_BUSCA_AVALIACAO_INDIVIDUAL = "SELECT (avg (av.Nota_Conteudo) * 0.6),"
-			+ " (avg(av.Nota_Inovacao) * 0.3), (avg(av.Nota_Apresentacao) * 0.1)"
+	private static final String COMANDO_SQL_SELECT_BUSCA_AVALIACAO_INDIVIDUAL = "SELECT CONVERT((avg (av.Nota_Conteudo) * 0.6), DECIMAL(20,2)),"
+			+ " CONVERT((avg(av.Nota_Inovacao) * 0.3), DECIMAL(20,2)), CONVERT((avg(av.Nota_Apresentacao) * 0.1), DECIMAL(20,2))"
 			+ " FROM avaliacao AS av"
 			+ " INNER JOIN apresentacao AS a ON av.Apresentacao_Id = a.Id_Apresentacao"
 			+ " WHERE a.Titulo = ?";
@@ -118,9 +118,9 @@ public class ApresentacaoDao {
 					public Avaliacao mapRow(ResultSet rs, int arg1)
 							throws SQLException {
 						Avaliacao avaliacao = new Avaliacao();
-						double mediaConteudo = rs.getDouble("(avg (av.Nota_Conteudo) * 0.6)");
-						double mediaInovacao = rs.getDouble("(avg(av.Nota_Inovacao) * 0.3)");
-						double mediaApresentacao = rs.getDouble("(avg(av.Nota_Apresentacao) * 0.1)");
+						double mediaConteudo = rs.getDouble("CONVERT((avg (av.Nota_Conteudo) * 0.6), DECIMAL(20,2))");
+						double mediaInovacao = rs.getDouble("CONVERT((avg(av.Nota_Inovacao) * 0.3), DECIMAL(20,2))");
+						double mediaApresentacao = rs.getDouble("CONVERT((avg(av.Nota_Apresentacao) * 0.1), DECIMAL(20,2))");
 						
 						
 						avaliacao.setMediaFinal(mediaConteudo + mediaInovacao + mediaApresentacao);
