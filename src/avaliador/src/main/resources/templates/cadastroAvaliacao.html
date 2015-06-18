@@ -148,78 +148,69 @@
                         <button class="btn btn-primary">Salvar</button>
                     </form>
                 </div>
-                <div class="compartilhator">
-                    <h3>Nome 1</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Avaliação de conteúdo</td>
-                                <td class="nota">4</td>
-                            </tr>
-                            <tr>
-                                <td>Inovação</td>
-                                <td class="nota">4</td>
-                            </tr>
-                            <tr>
-                                <td>Apresentação</td>
-                                <td class="nota">4</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <h3>Nome 2</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Avaliação de conteúdo</td>
-                                <td class="nota">4</td>
-                            </tr>
-                            <tr>
-                                <td>Inovação</td>
-                                <td class="nota">4</td>
-                            </tr>
-                            <tr>
-                                <td>Apresentação</td>
-                                <td class="nota">4</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <h3>Nome 3</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Avaliação de conteúdo</td>
-                                <td class="nota">4</td>
-                            </tr>
-                            <tr>
-                                <td>Inovação</td>
-                                <td class="nota">4</td>
-                            </tr>
-                            <tr>
-                                <td>Apresentação</td>
-                                <td class="nota">4</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div id="avaliacoes"  class="compartilhator">
+                   
+                    
                 </div>
             </div>
     </div>
-    <script>
-	    setInterval(function() {
-			var idApresentacao = document.getElementById('apresentacaoId').value;
+  
+	{{> scripts}}
+    {{> scriptsLogado}}
+      <script>
+    	
+    	$(function(){
+    		atualizaAvaliacoes();
+    	});
+    	
+    	function atualizaAvaliacoes(){
+		 var idApresentacao = document.getElementById('apresentacaoId').value;
 			console.log(idApresentacao);
 			$.ajax({
 				url: '/busca-avaliacao?idApresentacao='+idApresentacao,
 				type: 'POST',
 				success: function() {
-					console.log("Sucesso!");
+					/* console.log("Sucesso!"); */
 		        },
 			}).done(function(data) {
-				console.log(data);
+				/* console.log(data); */
+				
+				var template = ' <h3 id="avaliadorId">${nomeAvaliador}</h3>                               '
+                + '<table>'
+                +	'<tbody>'
+                +		'<tr>'
+                + 			'<td>Avaliação de conteúdo</td>'
+                + 			'<td class="nota">${notaConteudo}</td>'
+                + 		'</tr>'
+                + 		'<tr>'
+                + 			'<td>Inovação</td>'
+                + 			'<td class="nota">${notaInovacao}</td>'
+                + 		'</tr>'
+                + 		'<tr>'
+                + 			'<td>Apresentação</td>'
+                + 			'<td class="nota">${notaApresentacao}</td>'
+                + 		'</tr>'
+                + 	'</tbody>'
+                + '</table>';
+                 
+                $('#avaliacoes').empty();
+                for(var i = 0; i < data.length; i++) {   
+					var html = template.replace('${notaConteudo}', data[i].notaConteudo)
+									.replace('${notaInovacao}', data[i].notaInovacao)
+									.replace('${notaApresentacao}', data[i].notaApresentacao)
+                   					.replace('${nomeAvaliador}', data[i].avaliadorId);
+					$('#avaliacoes').append(html);
+                }
+			    
 			});
+		}
+		
+   		atualizaAvaliacoes();
+	    
+		setInterval(function() {
+			atualizaAvaliacoes();
 		}, 5000);
     </script>
-	{{> scripts}}
-    {{> scriptsLogado}}
 </body>
 
 </html>
