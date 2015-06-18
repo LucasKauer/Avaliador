@@ -29,19 +29,18 @@ public class AvaliacaoController {
 	public String cadastrarAvaliacao(Model model, HttpSession session) {
 		model.addAttribute("loginUsuario", session.getAttribute("usuarioLogado"));
 		model.addAttribute("listaApresentacoes", apresentacaoDao.consultaApresentacoes());
-		return "cadastroAvaliacao";
+		return "FINAL_CADASTRO_AVALIACAO";
 	}
 	
 	@RequestMapping(value = "/salvar-avaliacao", method = RequestMethod.POST)
 	public String salvarAvaliacao(Avaliacao avaliacao) {
 		avaliacaoDao.inserirAvaliacao(avaliacao);
-		return "cadastro-avaliacao";
+		return "FINAL_CADASTRO_AVALIACAO";
 	}
 	
 	@ResponseBody
 	@RequestMapping (value = "/busca-avaliacao", method = RequestMethod.POST)
 	public List<Avaliacao> buscaAvaliacao(Model model, @RequestParam String idApresentacao) {
-		System.out.println(idApresentacao);
 		int id = Integer.parseInt(idApresentacao);
 		return avaliacaoDao.buscaAvaliacaoPassandoIdApresentacao(id);
 	}

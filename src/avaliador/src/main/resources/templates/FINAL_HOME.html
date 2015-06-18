@@ -1,0 +1,26 @@
+<html>
+	<head>
+		{{> headLogado}}
+		<style>
+			#page-wrapper{
+				text-align: center;   
+			}
+			
+			.titulo{
+				color: #575757;
+				font-size: 42px;
+			}
+		</style>
+	</head>
+    <body>
+        <div id="wrapper">
+            {{> navLogado}}
+            <div id="page-wrapper" style="min-height: 94vh;">
+                <h2 class="titulo">Seja bem-vindo ao Avaliador!</h2>
+                <p>Que tal começar <a href="/cadastro-apresentacao">cadastrando</a> uma nova avaliação, ou <a href="/lista-apresentacao">listando</a> as já existentes?</p>
+			</div>
+		</div>
+        {{> scripts}}
+		{{> scriptsLogado}}
+    </body>
+</html>

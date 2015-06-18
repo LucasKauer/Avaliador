@@ -1,0 +1,214 @@
+<html>
+	<head>
+		{{> headLogado}}
+		<style>
+			.titulo{
+				color: #575757;   
+			}
+			
+			.formulator{
+				border-radius: 10px;
+				background-color: #f7f7f7;
+				width: 62%;
+				display: inline-block;
+				padding: 10px;
+			}
+			
+			.entrada{
+				display: block;
+				height: 40px;
+				width: 100%;
+			}
+			
+			.formulator textarea{
+				display: block;
+				max-width: 100%;
+				min-width: 100%;
+				max-height: 300px;
+			}
+			
+			.formulator button{
+				margin-top: 3vh;   
+			}
+			
+			
+			.compartilhator{
+				border-radius: 10px;
+				background-color: #f7f7f7;
+				padding: 10px;
+				width: 35%;
+				float: right;
+			}
+			
+			@media screen and (max-width: 500px){
+				.formulator{
+					display: block;
+					width: 98%;
+					margin: auto;
+				}
+				.compartilhator{
+					float: none;
+					display: block;
+					width: 98%;
+					margin: auto;
+					margin-top: 15px;
+				}
+			}
+			
+			h3{
+				color: #575757; 
+				font-size: 14px;
+				font-weight: 700;
+				margin-top: 2px;
+				color: black
+			}
+			
+			table{
+				width: 100%;
+				margin-bottom: 30px;
+			}
+			
+			td{
+				border: solid 1px #999999;
+				padding: 10px;
+				width: 70%;
+				text-align: left;
+			}
+			
+			.nota{
+				text-align: center;   
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="wrapper">
+			{{> navLogado}}
+
+			<div id="page-wrapper" style="min-height: 94vh;">
+				<h2 class="titulo">Cadastro de Avaliação</h2>
+					<div class="formulator">
+						<form id="formulario" name="formulario" action="#" method="post">
+							<div class="form-group">
+								
+								<label for="apresentacaoId">Apresentação</label>
+								<select name="apresentacaoId" id="apresentacaoId" class="entrada" required>
+									{{#listaApresentacoes}}
+									<option value="{{id}}">{{titulo}}</option>
+									{{/listaApresentacoes}}
+								</select>
+							</div>    
+							<div class="form-group">
+								<label for="comentarioGeral">Comentário Geral</label>
+								<textarea name="comentarioGeral" id="comentarioGeral" class="entrada" rows="2" cols="15" placeholder="O que você achou da apresentação?" maxlength="4000" required></textarea>
+							</div>
+							<div class="form-group">
+								<label for="criticaTecnica">Crítica Técnica</label>
+								<textarea name="criticaTecnica" id="criticaTecnica" class="entrada" rows="2" cols="15" placeholder="Qual a sua avaliação técnica?" maxlength="4000" required></textarea>
+							</div>
+							<div class="form-group">
+								<label for="notaConteudo">Avaliação de Conteúdo</label>
+								<select name="notaConteudo" id="notaConteudo" class="entrada" required>
+									<option value="1">1</option> 
+									<option value="2">2</option> 
+									<option value="3">3</option> 
+									<option value="4">4</option> 
+									<option value="5">5</option> 
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="notaInovacao">Inovação</label>
+								<select name="notaInovacao" id="notaInovacao" class="entrada" required>
+									<option value="1">1</option> 
+									<option value="2">2</option> 
+									<option value="3">3</option> 
+									<option value="4">4</option> 
+									<option value="5">5</option> 
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="notaApresentacao">Apresentação</label>
+								<select name="notaApresentacao" id="notaApresentacao" class="entrada" required>
+									<option value="1">1</option> 
+									<option value="2">2</option> 
+									<option value="3">3</option> 
+									<option value="4">4</option> 
+									<option value="5">5</option> 
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="situacao">Restrição de Acesso</label>
+								<select name="situacao" id="situacao" class="entrada" required>
+									<option value="1">Público</option>
+									<option value="0">Privado</option> 
+								</select>
+							</div>
+							<button class="btn btn-primary">Salvar</button>
+						</form>
+					</div>
+					<div id="avaliacoes"  class="compartilhator">
+					   
+						
+					</div>
+				</div>
+		</div>
+	  
+		{{> scripts}}
+		{{> scriptsLogado}}
+		  <script>
+			
+			$(function(){
+				atualizaAvaliacoes();
+			});
+			
+			function atualizaAvaliacoes(){
+			 var idApresentacao = document.getElementById('apresentacaoId').value;
+				console.log(idApresentacao);
+				$.ajax({
+					url: '/busca-avaliacao?idApresentacao='+idApresentacao,
+					type: 'POST',
+					success: function() {
+						/* console.log("Sucesso!"); */
+					},
+				}).done(function(data) {
+					/* console.log(data); */
+					
+					var template = ' <h3 id="avaliadorId">${nomeAvaliador}</h3>'
+					+ '<table>'
+					+	'<tbody>'
+					+		'<tr>'
+					+ 			'<td>Avaliação de conteúdo</td>'
+					+ 			'<td class="nota">${notaConteudo}</td>'
+					+ 		'</tr>'
+					+ 		'<tr>'
+					+ 			'<td>Inovação</td>'
+					+ 			'<td class="nota">${notaInovacao}</td>'
+					+ 		'</tr>'
+					+ 		'<tr>'
+					+ 			'<td>Apresentação</td>'
+					+ 			'<td class="nota">${notaApresentacao}</td>'
+					+ 		'</tr>'
+					+ 	'</tbody>'
+					+ '</table>';
+					 
+					$('#avaliacoes').empty();
+					for(var i = 0; i < data.length; i++) {   
+						var html = template.replace('${notaConteudo}', data[i].notaConteudo)
+										.replace('${notaInovacao}', data[i].notaInovacao)
+										.replace('${notaApresentacao}', data[i].notaApresentacao)
+										.replace('${nomeAvaliador}', data[i].avaliadorId);
+						$('#avaliacoes').append(html);
+					}
+					
+				});
+			}
+			
+			atualizaAvaliacoes();
+			
+			setInterval(function() {
+				atualizaAvaliacoes();
+			}, 5000);
+		</script>
+	</body>
+</html>

@@ -28,7 +28,7 @@ public class HomeController {
 			model.addAttribute("exibeAutenticacao", true);
 			model.addAttribute("exibeSair", false);
 		}
-		return "index-teste";
+		return "FINAL_INDEX";
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -42,7 +42,7 @@ public class HomeController {
 			model.addAttribute("exibeAutenticacao", true);
 			model.addAttribute("exibeSair", false);
 		}
-		return "home";
+		return "FINAL_HOME";
 	}
 	
 	@RequestMapping(value = "/buscar", method = RequestMethod.GET)

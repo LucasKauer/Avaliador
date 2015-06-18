@@ -18,6 +18,6 @@ public class AutorController {
 	@RequestMapping(value = "/salvar-autor", method = RequestMethod.POST)
 	public String salvarAutor(Autor autor) {
 		dao.inseriAutor(autor);
-		return "cadastro-avaliacao";
+		return "FINAL_CADASTRO_AVALIACAO";
 	}
 }

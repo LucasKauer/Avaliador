@@ -36,7 +36,7 @@ public class ApresentacaoController {
 		model.addAttribute("loginUsuario", session.getAttribute("usuarioLogado"));
 		model.addAttribute("categoria", Categoria.values());
 		model.addAttribute("situacao", Situacao.values());
-		return "cadastroApresentacao";
+		return "FINAL_CADASTRO_APRESENTACAO";
 	}
 	
 	@RequestMapping(value = "/salvar-apresentacao", method = RequestMethod.POST)
@@ -47,13 +47,13 @@ public class ApresentacaoController {
             autorDao.inseriAutor(autor);
         }
 
-		return "redirect:/lista-apresentacao";
+		return "redirect:/FINAL_LISTA_APRESENTACAO";
 	}
 	
 	@RequestMapping(value = "/lista-apresentacao", method = RequestMethod.GET)
 	public String listarApresentacao(Model model, HttpSession session) {
 		model.addAttribute("loginUsuario", session.getAttribute("usuarioLogado"));
 		model.addAttribute("apresentacao", apresentacaoDao.consultaApresentacoes());
-		return "listaApresentacao";
+		return "FINAL_LISTA_APRESENTACAO";
 	}
 }

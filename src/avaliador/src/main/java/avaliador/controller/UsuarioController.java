@@ -28,7 +28,7 @@ public class UsuarioController {
 			model.addAttribute("exibeAutenticacao", true);
 			model.addAttribute("exibeSair", false);
 		}	
-		return "login";
+		return "FINAL_ENTRAR";
 	}
 	
 	@RequestMapping(value = "/autenticar-usuario", method = RequestMethod.POST)
@@ -41,7 +41,7 @@ public class UsuarioController {
 			}
 			return "redirect:/home";
 		}
-		return "login";
+		return "FINAL_ENTRAR";
 	}
 	
 	@RequestMapping(value = "/cadastrar-usuario", method = RequestMethod.GET)
@@ -54,7 +54,7 @@ public class UsuarioController {
 			model.addAttribute("exibeAutenticacao", true);
 			model.addAttribute("exibeSair", false);
 		}
-		return "cadastrar-usuario";
+		return "FINAL_CADASTRAR_USUARIO";
 	}
 	
 	@RequestMapping("/logout")
