@@ -12,15 +12,19 @@
 
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
+				{{#exibeAutenticacao}}
 				<li>
 					<a class="page-scroll" href="/cadastrar-usuario">Cadastre-se</a>
 				</li>
 				<li>
 					<a class="page-scroll" href="/entrar">Entrar</a>
 				</li>
+				{{/exibeAutenticacao}}
+				{{#exibeSair}}
 				<li>
 					<a class="page-scroll" href="/logout">Sair</a>
 				</li>
+				{{/exibeSair}}
 			</ul>
 		</div>
 	</div>

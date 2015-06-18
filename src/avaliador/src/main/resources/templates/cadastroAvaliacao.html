@@ -95,9 +95,9 @@
                             
                             <label for="apresentacaoId">Apresentação</label>
                             <select name="apresentacaoId" id="apresentacaoId" class="entrada" required>
-                            	{{#listaApresentacao}}
+                            	{{#listaApresentacoes}}
                                 <option value="{{id}}">{{titulo}}</option>
-                                {{/listaApresentacao}}
+                                {{/listaApresentacoes}}
                             </select>
                         </div>    
                         <div class="form-group">
@@ -203,6 +203,7 @@
                 </div>
             </div>
     </div>
+	{{> scripts}}
     {{> scriptsLogado}}
 </body>
 
