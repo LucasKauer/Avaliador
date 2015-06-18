@@ -1,5 +1,7 @@
 package avaliador.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import avaliador.dao.ApresentacaoDao;
 import avaliador.dao.AvaliacaoDao;
@@ -35,10 +38,11 @@ public class AvaliacaoController {
 		return "cadastro-avaliacao";
 	}
 	
-	@RequestMapping(value = "/busca-avaliacao", method = RequestMethod.POST)
-	public String buscaAvaliacao(@RequestParam String idApresentacao) {
+	@ResponseBody
+	@RequestMapping (value = "/busca-avaliacao", method = RequestMethod.POST)
+	public List<Avaliacao> buscaAvaliacao(Model model, @RequestParam String idApresentacao) {
 		System.out.println(idApresentacao);
-		//avaliacaoDao.buscaAvaliacaoPassandoIdApresentacao(idApresentacao);
-		return "cadastroAvaliacao";
+		int id = Integer.parseInt(idApresentacao);
+		return avaliacaoDao.buscaAvaliacaoPassandoIdApresentacao(id);
 	}
 }

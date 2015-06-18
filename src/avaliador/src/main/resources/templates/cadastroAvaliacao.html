@@ -203,6 +203,21 @@
                 </div>
             </div>
     </div>
+    <script>
+	    setInterval(function() {
+			var idApresentacao = document.getElementById('apresentacaoId').value;
+			console.log(idApresentacao);
+			$.ajax({
+				url: '/busca-avaliacao?idApresentacao='+idApresentacao,
+				type: 'POST',
+				success: function() {
+					console.log("Sucesso!");
+		        },
+			}).done(function(data) {
+				console.log(data);
+			});
+		}, 5000);
+    </script>
 	{{> scripts}}
     {{> scriptsLogado}}
 </body>
