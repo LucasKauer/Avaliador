@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{{> head}}
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	</head>
+	<body id="page-top">
+		{{> nav}}
+	   <header>
+			<div class="header-content">
+				<div class="header-content-inner">
+					<h1>Avaliador</h1>
+					<hr>
+					<p>Busque por suas apresentações aqui!</p>
+					<center>
+						<form action="/buscar" method="get">
+							<div class="input-group">
+								<input type="text" name="titulo" id="titulo" class="form-control" required>
+								<!-- <input type="text" name="resumo" class="form-control"> -->
+								<span class="input-group-btn">
+					        		<!-- <button class="btn btn-default" type="submit">Buscar</button> -->
+					        		<!-- <input type="button" name="btnPesquisar" value="Pesquisar" onclick="getDados();"/> -->
+					        		<button type="button" class="btn btn-success" name="btnPesquisar" onclick="getDados();">Buscar</button>
+								</span>
+							</div>
+						</form>
+						<h2>Resultados da pesquisa:</h2>
+			            <div id="Resultado"></div>
+			            <hr>
+					</center>
+				</div>
+			</div>
+		</header>
+		<script>
+		//função bloqueia envio de informação apertando enter
+		$( document ).ready(function() {
+    			$('#titulo').on("keyup keypress", function(e) {
+  				var code = e.keyCode || e.which; 
+  					if (code  == 13) {               
+    					e.preventDefault();
+    					return false;
+  					}
+				});
+		});
+		/** * Função para criar um objeto XMLHTTPRequest */
+		function CriaRequest() {
+			try { 
+				request = new XMLHttpRequest();
+			} catch (IEAtual) { 
+				try	{ 
+					request = new ActiveXObject("Msxml2.XMLHTTP"); 
+				} catch(IEAntigo){
+					try	{
+						request = new ActiveXObject("Microsoft.XMLHTTP"); 
+					} catch(falha) {
+						request = false;
+					} 
+				} 
+			}   
+		    if (!request)
+		    	alert("Seu Navegador não suporta Ajax!");
+		    else 
+		    	return request;
+		}
+		/** * Função para enviar os dados */
+		function getDados() { // Declaração de Variáveis 
+			var nome = document.getElementById("titulo").value;
+		    var result = document.getElementById("Resultado");
+		    var xmlreq = CriaRequest();
+		    	    
+		    // Iniciar uma requisição
+		    xmlreq.open("GET", "/buscar?titulo=" + nome, true); 
+		    // Atribui uma função para ser executada sempre que houver uma mudança de ado 
+		    xmlreq.onreadystatechange = function(){
+		        // Verifica se foi concluído com sucesso e a conexão fechada (readyState=4)
+		        if (xmlreq.readyState == 4) { 
+		            // Verifica se o arquivo foi encontrado com sucesso
+		            if (xmlreq.status == 200) {
+		                 result.innerHTML = xmlreq.responseText; 
+		            } else { 
+		            	result.innerHTML = "Erro: " + xmlreq.statusText;
+		            }
+		        }
+		    }; 
+		    xmlreq.send(null); 
+		}
+		</script>
+		{{> scripts}}
+	</body>
+</html>

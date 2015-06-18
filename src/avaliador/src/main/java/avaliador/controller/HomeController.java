@@ -28,12 +28,18 @@ public class HomeController {
 			model.addAttribute("exibeAutenticacao", true);
 			model.addAttribute("exibeSair", false);
 		}
-		return "index";
+		return "index-teste";
 	}
 	
 	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
 	public String buscar(Model model, Apresentacao apresentacao) {
-		model.addAttribute("resposta", apresentacaoDao.buscaHome(apresentacao.getTitulo(), apresentacao.getResumo()));
+		model.addAttribute("resposta", apresentacaoDao.buscaHome(apresentacao.getTitulo()));
 		return "lista-busca";
+	}
+	
+	@RequestMapping(value = "/exibir-resultado", method = RequestMethod.GET)
+	public String exibirResultado(Model model, Apresentacao apresentacao) {
+		model.addAttribute("resposta", apresentacaoDao.buscaApresentacaoIndividual(apresentacao.getTitulo()));
+		return "lista-resultado-pesquisa";
 	}
 }

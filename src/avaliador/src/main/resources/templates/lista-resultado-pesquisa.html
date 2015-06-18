@@ -1,0 +1,33 @@
+<html>
+	<head>
+		{{> head}}
+	</head>
+	<body>
+		{{> nav}}
+		<header id="top" class="header">
+			<table class="table table-condensed">
+				<thead>
+					<tr class="success">
+						<th>Comentario</th>
+						<th>Comentario</th>
+						<th>nota</th>	
+						<th>nota</th>
+						<th>nota</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#resposta}}
+					<tr>
+						<td class="active">{{comentarioGeral}}</td>
+						<td class="active">{{criticaTecnica}}</td>
+						<td class="active">{{notaConteudo}}</td>
+						<td class="active">{{notaInovacao}}</td>
+						<td class="active">{{notaApresentacao}}</td>
+					</tr>
+					{{/resposta}}
+				</tbody>
+			</table>
+		</header>
+		{{> scripts}}
+	</body>
+</html>

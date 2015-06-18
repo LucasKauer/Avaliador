@@ -1,0 +1,19 @@
+<table class="table table-condensed">
+	<thead>
+		<tr class="success">
+			<th>Titulo</th>
+			<th>Acao</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#resposta}}
+			<tr>
+				<td class="active">{{titulo}}</td>
+				<td class="active">
+					<a href="/exibir-resultado?titulo={{titulo}}">
+					<button class="btn btn-primary">Ver</button>
+					</a>
+				</td>
+			</tr>
+		{{/resposta}}
+</tbody>

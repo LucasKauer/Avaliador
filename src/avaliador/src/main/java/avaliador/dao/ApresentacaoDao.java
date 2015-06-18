@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import avaliador.model.Apresentacao;
+import avaliador.model.Avaliacao;
 import avaliador.model.Categoria;
 import avaliador.model.Situacao;
 
@@ -24,7 +25,11 @@ public class ApresentacaoDao {
 	private static final String COMANDO_SQL_INSERT = "INSERT INTO Apresentacao(Titulo, Resumo, Categoria, Data, Situacao) values (?, ?, ?, ?, ?)";
 	private static final String COMANDO_SQL_UPDATE = "UPDATE Avaliacao SET Titulo = ?, Resumo = ?, Categoria = ?, Data = ?, Situacao = ?  WHERE Id_Apresentacao = ?";
 	private static final String COMANDO_SQL_DELETE = "DELETE FROM Apresentacao WHERE Id_Apresentacao = ?";
-	private static final String COMANDO_SQL_SELECT_BUSCA = "SELECT Titulo, Resumo FROM apresentacao WHERE Titulo LIKE ? OR Resumo LIKE ?";
+	private static final String COMANDO_SQL_SELECT_BUSCA = "SELECT Titulo, Resumo FROM apresentacao WHERE Titulo LIKE ?";
+	private static final String COMANDO_SQL_SELECT_BUSCA_AVALIACAO_INDIVIDUAL =
+	"SELECT av.Comentario_Geral, av.Critica_Tecnica, av.Nota_Apresentacao, av.Nota_Conteudo, av.Nota_Inovacao"
+	+ " FROM avaliacao AS av INNER JOIN apresentacao AS a ON av.Apresentacao_Id = a.Id_Apresentacao"
+	+ " WHERE a.Titulo = ?";
 	
 	/**
 	 * Adiciona uma apresentacao no banco
@@ -93,17 +98,32 @@ public class ApresentacaoDao {
 
 	}
 	
-	public List<Apresentacao> buscaHome(String titulo, String resumo) {
+	public List<Apresentacao> buscaHome(String titulo) {
 		return jdbcTemplate.query(COMANDO_SQL_SELECT_BUSCA,
 				new RowMapper<Apresentacao>() {
 					public Apresentacao mapRow(ResultSet rs, int arg1)
 							throws SQLException {
 						Apresentacao apresentacao = new Apresentacao();
 						apresentacao.setTitulo(rs.getString("Titulo"));
-						apresentacao.setResumo(rs.getString("Resumo"));
 						return apresentacao;
 					}
-				}, '%' + titulo + '%', '%' + resumo + '%' );
+				}, '%' + titulo + '%');
+	}
+
+	public List<Avaliacao> buscaApresentacaoIndividual(String titulo) {
+		return jdbcTemplate.query(COMANDO_SQL_SELECT_BUSCA_AVALIACAO_INDIVIDUAL,
+				new RowMapper<Avaliacao>() {
+					public Avaliacao mapRow(ResultSet rs, int arg1)
+							throws SQLException {
+						Avaliacao avaliacao = new Avaliacao();
+						avaliacao.setComentarioGeral(rs.getString("Comentario_Geral"));
+						avaliacao.setCriticaTecnica(rs.getString("Critica_Tecnica"));
+						avaliacao.setNotaConteudo(rs.getInt("Nota_Conteudo"));
+						avaliacao.setNotaInovacao(rs.getInt("Nota_Inovacao"));
+						avaliacao.setNotaApresentacao(rs.getInt("Nota_Apresentacao"));
+						return avaliacao;
+					}
+				}, titulo);
 	}
 	
 }
