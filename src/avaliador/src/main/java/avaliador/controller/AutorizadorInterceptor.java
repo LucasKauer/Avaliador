@@ -16,7 +16,9 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 			uri.endsWith("cadastrar-usuario") || // metodo que cadastra o usuario no sistema
             uri.endsWith("autenticar-usuario") || // metodo que chama a tela de cadastro de usuario
             uri.endsWith("salvar-usuario") ||
-            uri.endsWith("buscar") ||
+            uri.endsWith("buscar-titulo") ||
+            uri.endsWith("buscar-resumo") ||
+            uri.endsWith("buscar-autor") ||
             uri.endsWith("exibir-resultado") ||
 			uri.endsWith("head") || // view que contem o HEAD padrao
 			uri.endsWith("nav") || // view que contem a NAV padrao
