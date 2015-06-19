@@ -4,6 +4,23 @@
 		{{> head}}
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <link rel="stylesheet" href="css/busca.css" type="text/css">
+        <style>
+			.fonte-titulo {
+				 font-family: sans-serif;
+				 font-size: 16px;
+				 color: #808080;
+			}
+
+			.fonte-nota {
+				 font-family: sans-serif;
+				 font-size: 14px;
+				 color: black;	
+			}
+
+			.vermelho {
+				 color: #c52f2a;
+			}
+        </style>
 	</head>
 	<body id="page-top">
 		{{> nav}}
@@ -14,16 +31,46 @@
 					<hr>
 					<p>Busque por suas apresentações aqui!</p>
 					<center>
-						<form action="/buscar" method="get">
-							<div class="input-group">
-								<input type="text" name="titulo" id="titulo" class="form-control" required>
-								<span class="input-group-btn">
-					        		<button type="button" class="btn btn-success" name="btnPesquisar" onclick="getDados();">Buscar</button>
-								</span>
-							</div>
-						</form>			            
-			            
-                        <div id="Resultado"></div>
+						<div class="input-group">
+							<input type="text" name="titulo" id="palavra" class="form-control" required>
+							<span class="input-group-btn">
+					       		<button href="#myModal" id="openBtn" data-toggle="modal" class="btn btn-info" name="btnPesquisar" onclick="submitForm();">Buscar</button>
+							</span>
+						</div>
+						<hr>
+						<p>Selecione a opcao de busca.</p>
+						<div class="btn-group" data-toggle="buttons">
+    						<label class="btn btn-default">
+        						<input type="radio" name="opcao" id="radio_titulo" value="titulo" checked>
+   							 		Titulo
+   							</label>
+    						<label class="btn btn-default">
+        						<input type="radio" name="opcao" id="radio_resumo" value="resumo">
+    								Resumo
+    						</label>
+    						<label class="btn btn-default">
+        						<input type="radio" name="opcao" id="radio_autor" value="autor">
+    								Autor 
+    						</label>
+						</div>
+						<div class="modal fade" id="myModal">
+						<div class="modal-dialog">
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <h3 class="modal-title fonte-titulo">Resultados da pesquisa:</h3>
+							        </div>
+							        <div class="modal-body">
+										<div id="avaliacoes">      
+								        </div>
+									</div>
+							        <div class="modal-footer">
+							          	<button type="button" class="btn btn-danger" data-dismiss="modal">
+							          		Fechar
+							          	</button>
+							        </div>		
+							      </div>
+							    </div>
+						</div>
 					</center>
 				</div>
 			</div>
@@ -39,47 +86,101 @@
   					}
 				});
 		});
-		/** * Função para criar um objeto XMLHTTPRequest */
-		function CriaRequest() {
-			try { 
-				request = new XMLHttpRequest();
-			} catch (IEAtual) { 
-				try	{ 
-					request = new ActiveXObject("Msxml2.XMLHTTP"); 
-				} catch(IEAntigo){
-					try	{
-						request = new ActiveXObject("Microsoft.XMLHTTP"); 
-					} catch(falha) {
-						request = false;
-					} 
-				} 
-			}   
-		    if (!request)
-		    	alert("Seu Navegador não suporta Ajax!");
-		    else 
-		    	return request;
-		}
-		/** * Função para enviar os dados */
-		function getDados() { // Declaração de Variáveis 
-			var nome = document.getElementById("titulo").value;
-		    var result = document.getElementById("Resultado");
-		    var xmlreq = CriaRequest();
-		    	    
-		    // Iniciar uma requisição
-		    xmlreq.open("GET", "/buscar?titulo=" + nome, true); 
-		    // Atribui uma função para ser executada sempre que houver uma mudança de ado 
-		    xmlreq.onreadystatechange = function(){
-		        // Verifica se foi concluído com sucesso e a conexão fechada (readyState=4)
-		        if (xmlreq.readyState == 4) { 
-		            // Verifica se o arquivo foi encontrado com sucesso
-		            if (xmlreq.status == 200) {
-		                 result.innerHTML = xmlreq.responseText; 
-		            } else { 
-		            	result.innerHTML = "Erro: " + xmlreq.statusText;
-		            }
-		        }
-		    }; 
-		    xmlreq.send(null); 
+
+		function submitForm() {
+    		var radios = document.getElementsByName('opcao');
+    		var nome = document.getElementById("palavra").value;
+
+			for (var i = 0, length = radios.length; i < length; i++) {
+			    if (radios[i].checked) {
+        			if (radios[i].value === 'titulo') {
+ 						$.ajax({
+								url: '/buscar-titulo?titulo=' + nome,
+								type: 'POST'
+						 }).done(function(data) {					
+							var template = 
+							+'<table class="table table-striped" id="tblGrid">'
+							+	'<thead id="tblHead">'
+							+		'<tr>'
+							+			'<th class="fonte-titulo">Titulo</th>'
+							+			'<th class="fonte-titulo">Nota</th>'
+							+		'</tr>'
+							+	'</thead>'
+							+   '<tbody>'
+							+		'<tr>'
+							+			'<td class="fonte-nota">${tituloApresentacao}</td>'
+							+			'<td class="fonte-nota">${mediaFinal}</td>'
+							+    	'</tr>'
+							+ 	'</tbody>'
+							+'</table>';
+							$('#avaliacoes').empty();
+							for(var i = 0; i < data.length; i++) {   
+								var html = template.replace('${tituloApresentacao}', data[i].tituloApresentacao)
+												   .replace('${mediaFinal}', data[i].mediaFinal.toFixed(2));
+								$('#avaliacoes').append(html);
+							}		
+						});
+        			} else if(radios[i].value === 'resumo') {
+        				$.ajax({
+								url: '/buscar-resumo?resumo=' + nome,
+								type: 'POST'
+						 }).done(function(data) {					
+							var template = 
+							+'<table class="table table-striped" id="tblGrid">'
+							+	'<thead id="tblHead">'
+							+	'<tr>'
+							+		'<th class="fonte-titulo">Titulo da apresentações</th>'
+							+		'<th class="fonte-titulo">Resumo</th>'
+							+		'<th class="fonte-titulo">Nota</th>'
+							+	'</tr>'
+							+	'</thead>'
+							+   '<tbody>'
+							+	'<tr>'
+							+		'<td class="fonte-nota">${tituloApresentacao}</td>'
+							+		'<td class="fonte-nota">${resumoApresentacao}</td>'
+							+		'<td class="fonte-nota">${mediaFinal}</td>'
+							+	'</tr>'
+							+   '</tbody>'
+							+'</table>';
+							$('#avaliacoes').empty();
+							for(var i = 0; i < data.length; i++) {   
+								var html = template.replace('${tituloApresentacao}', data[i].resumoApresentacao).replace('${resumoApresentacao}', data[i].tituloApresentacao).replace('${mediaFinal}', data[i].mediaFinal.toFixed(2));
+								$('#avaliacoes').append(html);
+							}		
+						});
+        			} else {
+        				        				$.ajax({
+								url: '/buscar-autor?autor=' + nome,
+								type: 'POST'
+						 }).done(function(data) {					
+							var template = 
+							+'<table class="table table-striped" id="tblGrid">'
+							+	'<thead id="tblHead">'
+							+		'<tr>'
+							+			'<th class="fonte-titulo">Autor</th>'
+							+			'<th class="fonte-titulo">T�tulo da apresentações</th>'
+							+			'<th class="fonte-titulo">Nota</th>'
+							+		'</tr>'
+							+	'</thead>'
+							+	'<tbody>'
+							+		'<tr>'
+							+			'<td class="fonte-nota">${autor}</td>'
+							+			'<td class="fonte-nota">${resumoApresentacao}</td>'
+							+			'<td class="fonte-nota">${mediaFinal}</td>'
+							+		'</tr>'
+							+	'</tbody>'
+							+'</table>';
+							$('#avaliacoes').empty();
+							for(var i = 0; i < data.length; i++) {   
+								var html = template.replace('${autor}', data[i].autor).replace('${resumoApresentacao}', data[i].tituloApresentacao).replace('${mediaFinal}', data[i].mediaFinal.toFixed(2));
+								$('#avaliacoes').append(html);
+							}		
+						});
+
+        			};
+        			break;
+			    }
+			}
 		}
 		</script>
 		{{> scripts}}

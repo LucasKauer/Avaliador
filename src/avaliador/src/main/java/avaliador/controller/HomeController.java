@@ -1,5 +1,7 @@
 package avaliador.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -7,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import avaliador.dao.ApresentacaoDao;
-import avaliador.model.Apresentacao;
+import avaliador.model.Avaliacao;
 import avaliador.model.Usuario;
 
 @Controller
@@ -45,15 +49,21 @@ public class HomeController {
 		return "FINAL_HOME";
 	}
 	
-	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
-	public String buscar(Model model, Apresentacao apresentacao) {
-		model.addAttribute("resposta", apresentacaoDao.buscaHome(apresentacao.getTitulo()));
-		return "lista-busca";
+	@ResponseBody
+	@RequestMapping(value = "/buscar-titulo", method = RequestMethod.POST)
+	public List<Avaliacao> buscarTitulo(Model model,  @RequestParam String titulo) {
+		return apresentacaoDao.buscaTitulo(titulo);
 	}
 	
-	@RequestMapping(value = "/exibir-resultado", method = RequestMethod.GET)
-	public String exibirResultado(Model model, Apresentacao apresentacao) {
-		model.addAttribute("resposta", apresentacaoDao.buscaApresentacaoIndividual(apresentacao.getTitulo()));
-		return "lista-resultado-pesquisa";
+	@ResponseBody
+	@RequestMapping(value = "/buscar-resumo", method = RequestMethod.POST)
+	public List<Avaliacao> buscarResumo(Model model,  @RequestParam String resumo) {
+		return apresentacaoDao.buscaResumo(resumo);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/buscar-autor", method = RequestMethod.POST)
+	public List<Avaliacao> buscarAutor(Model model,  @RequestParam String autor) {
+		return apresentacaoDao.buscaAutor(autor);
 	}
 }

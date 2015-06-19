@@ -8,10 +8,12 @@ public class Avaliacao extends Entidade {
 	private int notaApresentacao;
 	private boolean restricao;
 	private double mediaFinal;
-	
 	// FK
 	private int avaliadorId;
 	private int apresentacaoId;
+	private String tituloApresentacao;
+	private String resumoApresentacao;
+	private String autor;
 
 	public Avaliacao() {
 		
@@ -87,5 +89,29 @@ public class Avaliacao extends Entidade {
 
 	public void setMediaFinal(double mediaFinal) {
 		this.mediaFinal = mediaFinal;
+	}
+
+	public String getTituloApresentacao() {
+		return tituloApresentacao;
+	}
+
+	public void setTituloApresentacao(String tituloApresentacao) {
+		this.tituloApresentacao = tituloApresentacao;
+	}
+
+	public String getResumoApresentacao() {
+		return resumoApresentacao;
+	}
+
+	public void setResumoApresentacao(String resumoApresentacao) {
+		this.resumoApresentacao = resumoApresentacao;
+	}
+
+	public String getAutor() {
+		return autor;
+	}
+
+	public void setAutor(String autor) {
+		this.autor = autor;
 	}
 }
