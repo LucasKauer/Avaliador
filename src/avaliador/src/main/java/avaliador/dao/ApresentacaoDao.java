@@ -25,13 +25,26 @@ public class ApresentacaoDao {
 	private static final String COMANDO_SQL_INSERT = "INSERT INTO Apresentacao(Titulo, Resumo, Categoria, Data, Situacao) values (?, ?, ?, ?, ?)";
 	private static final String COMANDO_SQL_UPDATE = "UPDATE Avaliacao SET Titulo = ?, Resumo = ?, Categoria = ?, Data = ?, Situacao = ?  WHERE Id_Apresentacao = ?";
 	private static final String COMANDO_SQL_DELETE = "DELETE FROM Apresentacao WHERE Id_Apresentacao = ?";
-	private static final String COMANDO_SQL_SELECT_BUSCA = "SELECT Titulo, Resumo FROM apresentacao WHERE Titulo LIKE ?";
-	private static final String COMANDO_SQL_SELECT_BUSCA_AVALIACAO_INDIVIDUAL = "SELECT CONVERT((avg (av.Nota_Conteudo) * 0.6), DECIMAL(20,2)),"
+	private static final String COMANDO_SQL_SELECT_BUSCA_TITULO = "SELECT  a.Titulo, CONVERT((avg (av.Nota_Conteudo) * 0.6), DECIMAL(20,2)),"
 			+ " CONVERT((avg(av.Nota_Inovacao) * 0.3), DECIMAL(20,2)), CONVERT((avg(av.Nota_Apresentacao) * 0.1), DECIMAL(20,2))"
 			+ " FROM avaliacao AS av"
 			+ " INNER JOIN apresentacao AS a ON av.Apresentacao_Id = a.Id_Apresentacao"
-			+ " WHERE a.Titulo = ?";
-
+			+ " WHERE a.Titulo LIKE ?";
+	private static final String COMANDO_SQL_SELECT_BUSCA_RESUMO = "SELECT  a.Resumo, a.Titulo, CONVERT((avg (av.Nota_Conteudo) * 0.6), DECIMAL(20,2)),"
+			+ " CONVERT((avg(av.Nota_Inovacao) * 0.3), DECIMAL(20,2)), CONVERT((avg(av.Nota_Apresentacao) * 0.1), DECIMAL(20,2))"
+			+ " FROM avaliacao AS av"
+			+ " INNER JOIN apresentacao AS a ON av.Apresentacao_Id = a.Id_Apresentacao"
+			+ " WHERE a.Resumo LIKE ?";
+	private static final String COMANDO_SQL_SELECT_BUSCA_AUTOR = "SELECT autor.Nome, apre.Titulo, CONVERT((avg (av.Nota_Conteudo) * 0.6), DECIMAL(20,2)),"
+			+ 	" CONVERT((avg(av.Nota_Inovacao) * 0.3), DECIMAL(20,2))," 
+			+	" CONVERT((avg(av.Nota_Apresentacao) * 0.1), DECIMAL(20,2))"
+			+	" FROM avaliacao AS av"
+			+	" INNER JOIN autor_apresentacao AS a ON av.Apresentacao_Id = a.Apresentacao_Id"
+			+	" INNER JOIN apresentacao AS apre ON apre.Id_Apresentacao = a.Apresentacao_Id"
+			+	" INNER JOIN autor on autor.Id_Autor = a.Autor_Id"
+			+	" WHERE autor.Nome LIKE ?";
+	
+	
 	/**
 	 * Adiciona uma apresentacao no banco
 	 * 
@@ -99,21 +112,9 @@ public class ApresentacaoDao {
 
 	}
 
-	public List<Apresentacao> buscaHome(String titulo) {
-		return jdbcTemplate.query(COMANDO_SQL_SELECT_BUSCA,
-				new RowMapper<Apresentacao>() {
-					public Apresentacao mapRow(ResultSet rs, int arg1)
-							throws SQLException {
-						Apresentacao apresentacao = new Apresentacao();
-						apresentacao.setTitulo(rs.getString("Titulo"));
-						return apresentacao;
-					}
-				}, '%' + titulo + '%');
-	}
-
-	public List<Avaliacao> buscaApresentacaoIndividual(String titulo) {
+	public List<Avaliacao> buscaTitulo(String titulo) {
 		return jdbcTemplate.query(
-				COMANDO_SQL_SELECT_BUSCA_AVALIACAO_INDIVIDUAL,
+				COMANDO_SQL_SELECT_BUSCA_TITULO,
 				new RowMapper<Avaliacao>() {
 					public Avaliacao mapRow(ResultSet rs, int arg1)
 							throws SQLException {
@@ -122,11 +123,49 @@ public class ApresentacaoDao {
 						double mediaInovacao = rs.getDouble("CONVERT((avg(av.Nota_Inovacao) * 0.3), DECIMAL(20,2))");
 						double mediaApresentacao = rs.getDouble("CONVERT((avg(av.Nota_Apresentacao) * 0.1), DECIMAL(20,2))");
 						
-						
+						avaliacao.setTituloApresentacao(rs.getString("a.Titulo"));
 						avaliacao.setMediaFinal(mediaConteudo + mediaInovacao + mediaApresentacao);
 						return avaliacao;
 					}
-				}, titulo);
+				},  '%' + titulo + '%');
+	}
+	
+	public List<Avaliacao> buscaResumo(String resumo) {
+		return jdbcTemplate.query(
+				COMANDO_SQL_SELECT_BUSCA_RESUMO,
+				new RowMapper<Avaliacao>() {
+					public Avaliacao mapRow(ResultSet rs, int arg1)
+							throws SQLException {
+						Avaliacao avaliacao = new Avaliacao();
+						double mediaConteudo = rs.getDouble("CONVERT((avg (av.Nota_Conteudo) * 0.6), DECIMAL(20,2))");
+						double mediaInovacao = rs.getDouble("CONVERT((avg(av.Nota_Inovacao) * 0.3), DECIMAL(20,2))");
+						double mediaApresentacao = rs.getDouble("CONVERT((avg(av.Nota_Apresentacao) * 0.1), DECIMAL(20,2))");
+						
+						avaliacao.setResumoApresentacao(rs.getString("a.Resumo"));
+						avaliacao.setTituloApresentacao(rs.getString("a.Titulo"));
+						avaliacao.setMediaFinal(mediaConteudo + mediaInovacao + mediaApresentacao);
+						return avaliacao;
+					}
+				},  '%' + resumo + '%');
+	}
+	
+	public List<Avaliacao> buscaAutor(String autor) {
+		return jdbcTemplate.query(
+				COMANDO_SQL_SELECT_BUSCA_AUTOR,
+				new RowMapper<Avaliacao>() {
+					public Avaliacao mapRow(ResultSet rs, int arg1)
+							throws SQLException {
+						Avaliacao avaliacao = new Avaliacao();
+						double mediaConteudo = rs.getDouble("CONVERT((avg (av.Nota_Conteudo) * 0.6), DECIMAL(20,2))");
+						double mediaInovacao = rs.getDouble("CONVERT((avg(av.Nota_Inovacao) * 0.3), DECIMAL(20,2))");
+						double mediaApresentacao = rs.getDouble("CONVERT((avg(av.Nota_Apresentacao) * 0.1), DECIMAL(20,2))");
+						
+						avaliacao.setAutor(rs.getString("autor.Nome"));
+						avaliacao.setTituloApresentacao(rs.getString("apre.Titulo"));
+						avaliacao.setMediaFinal(mediaConteudo + mediaInovacao + mediaApresentacao);
+						return avaliacao;
+					}
+				},  '%' + autor + '%');
 	}
 
 }
