@@ -35,7 +35,7 @@ public class AvaliacaoController {
 	@RequestMapping(value = "/salvar-avaliacao", method = RequestMethod.POST)
 	public String salvarAvaliacao(Avaliacao avaliacao) {
 		avaliacaoDao.inserirAvaliacao(avaliacao);
-		return "FINAL_CADASTRO_AVALIACAO";
+		return "redirect:/cadastro-avaliacao";
 	}
 	
 	@ResponseBody

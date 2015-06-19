@@ -20,7 +20,7 @@ public class AvaliacaoDao {
 	@Inject
 	private JdbcTemplate jdbcTemplate;
 	
-	private final String COMANDO_SQL_INSERT = "INSERT INTO AVALIACAO (Comentario_Geral, Critica_Tecnica, Nota_Conteudo, Nota_Inovacao, Nota_apresentacao, Restricao, Avaliador_Id, Apresentacao_Id) VALUES (?, ?, ?, ?, ?, ?, 1, 1)";
+	private final String COMANDO_SQL_INSERT = "INSERT INTO AVALIACAO (Comentario_Geral, Critica_Tecnica, Nota_Conteudo, Nota_Inovacao, Nota_apresentacao, Restricao, Avaliador_Id, Apresentacao_Id) VALUES (?, ?, ?, ?, ?, ?, 1, ?)";
 	private final String COMANDO_SQL_UPDATE = "UPDATE AVALIACAO SET Comentario_Geral = ?, Critica_Tecnica = ?, Nota_Conteudo = ?, Nota_Inovacao = ?, Nota_apresentacao = ?, Restricao = ? WHERE Id_Avaliacao = ?";
 	private final String COMANDO_SQL_DELETE = "DELETE FROM AVALIACAO WHERE Id_Avaliacao = ?";
 	private final String COMANDO_SQL_SELECT = "SELECT Id_Avaliacao, Comentario_Geral, Critica_Tecnica, Nota_Conteudo, Nota_Inovacao, Nota_Apresentacao, Restricao FROM AVALIACAO";
@@ -39,7 +39,8 @@ public class AvaliacaoDao {
 				avaliacao.getNotaConteudo(),
 				avaliacao.getNotaInovacao(),
 				avaliacao.getNotaApresentacao(),
-				avaliacao.isRestricao());
+				avaliacao.isRestricao(),
+				avaliacao.getApresentacaoId());
 	}
 	
 	/**
