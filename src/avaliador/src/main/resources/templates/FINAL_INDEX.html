@@ -38,7 +38,7 @@
 							</span>
 						</div>
 						<hr>
-						<p>Selecione a opcao de busca.</p>
+						<p>Selecione a opção de busca.</p>
 						<div class="btn-group" data-toggle="buttons">
     						<label class="btn btn-default">
         						<input type="radio" name="opcao" id="radio_titulo" value="titulo" checked>
@@ -144,7 +144,7 @@
 							+'</table>';
 							$('#avaliacoes').empty();
 							for(var i = 0; i < data.length; i++) {   
-								var html = template.replace('${tituloApresentacao}', data[i].resumoApresentacao).replace('${resumoApresentacao}', data[i].tituloApresentacao).replace('${mediaFinal}', data[i].mediaFinal.toFixed(2));
+								var html = template.replace('${tituloApresentacao}', data[i].tituloApresentacao).replace('${resumoApresentacao}', data[i].resumoApresentacao).replace('${mediaFinal}', data[i].mediaFinal.toFixed(2));
 								$('#avaliacoes').append(html);
 							}		
 						});
