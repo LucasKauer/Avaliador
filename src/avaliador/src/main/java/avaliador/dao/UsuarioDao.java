@@ -26,12 +26,12 @@ public class UsuarioDao {
 	private static final String COMANDO_SQL_SELECT_USUARIO = "SELECT Id_Usuario, Login, Senha, Nivel_Usuario FROM Usuario WHERE Login = ? AND Senha = ?";
 	
 	// Adiciona um usuario no banco
-	public void inserirUsuario(Usuario usuario) throws DataAccessException, NoSuchAlgorithmException, InvalidKeySpecException {
+	public void inserirUsuario(Usuario usuario) {
 		jdbcTemplate.update(
 				COMANDO_SQL_INSERT_USUARIO,
 				usuario.getLogin(),
 				usuario.getSenha(),
-				usuario.getTipoUsuario());
+				"AVALIADOR");
 	}
 	
 	// Valida o usuario quando ele faz o login

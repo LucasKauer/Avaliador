@@ -57,6 +57,12 @@ public class UsuarioController {
 		return "FINAL_CADASTRAR_USUARIO";
 	}
 	
+	@RequestMapping(value = "/salvar-usuario", method = RequestMethod.POST)
+	public String salvarUsuario(HttpSession session, Model model, Usuario usuario) {
+		usuarioDao.inserirUsuario(usuario);;
+		return "FINAL_ENTRAR";
+	}
+	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
