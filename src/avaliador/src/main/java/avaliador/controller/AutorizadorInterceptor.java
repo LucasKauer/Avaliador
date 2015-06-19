@@ -11,8 +11,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object controller) throws Exception {
 
 		String uri = request.getRequestURI();
-		if (uri.endsWith("") ||
-			uri.endsWith("/") ||
+		if (uri.endsWith("/") ||
 			uri.endsWith("entrar") || // metodo que chama a tela de login
 			uri.endsWith("cadastrar-usuario") || // metodo que cadastra o usuario no sistema
             uri.endsWith("autenticar-usuario") || // metodo que chama a tela de cadastro de usuario
