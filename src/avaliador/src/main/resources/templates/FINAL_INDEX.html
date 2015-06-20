@@ -5,21 +5,51 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <link rel="stylesheet" href="css/busca.css" type="text/css">
         <style>
+            
+            .modal-dialog{
+                min-width: 80%;
+                margin-top: 20vh;
+            }  
+            
 			.fonte-titulo {
-				 font-family: sans-serif;
-				 font-size: 16px;
-				 color: #808080;
+				font-family: sans-serif;
+				font-size: 16px;
+				color: #808080;
+                text-align: center;
 			}
 
 			.fonte-nota {
-				 font-family: sans-serif;
-				 font-size: 14px;
-				 color: black;	
+				font-family: sans-serif;
+				font-size: 14px;
+				color: black;
 			}
 
 			.vermelho {
 				 color: #c52f2a;
 			}
+            
+            .espaco-ap{
+                width: 27%;
+                text-align: center;
+            }
+            
+            .espaco-resumo{
+                width: 60%;
+                text-align: justify;
+                padding-left: 10px;
+                padding-right: 10px;
+                
+            }
+            
+            .espaco-nt{
+                width: 13%;
+                text-align: center;
+            }
+
+            .espaco-normal{
+                width: 50%;
+                text-align: center;
+            }
         </style>
 	</head>
 	<body id="page-top">
@@ -99,17 +129,17 @@
 								type: 'POST'
 						 }).done(function(data) {					
 							var template = 
-							+'<table class="table table-striped" id="tblGrid">'
+							+'<table class="table table-striped resultados" id="tblGrid">'
 							+	'<thead id="tblHead">'
 							+		'<tr>'
-							+			'<th class="fonte-titulo">Título</th>'
+							+			'<th class="fonte-titulo">Título da Apresentação</th>'
 							+			'<th class="fonte-titulo">Nota</th>'
 							+		'</tr>'
 							+	'</thead>'
 							+   '<tbody>'
 							+		'<tr>'
-							+			'<td class="fonte-nota">${tituloApresentacao}</td>'
-							+			'<td class="fonte-nota">${mediaFinal}</td>'
+							+			'<td class="fonte-nota espaco-normal">${tituloApresentacao}</td>'
+							+			'<td class="fonte-nota espaco-normal">${mediaFinal}</td>'
 							+    	'</tr>'
 							+ 	'</tbody>'
 							+'</table>';
@@ -136,9 +166,9 @@
 							+	'</thead>'
 							+   '<tbody>'
 							+	'<tr>'
-							+		'<td class="fonte-nota">${tituloApresentacao}</td>'
-							+		'<td class="fonte-nota">${resumoApresentacao}</td>'
-							+		'<td class="fonte-nota">${mediaFinal}</td>'
+							+		'<td class="fonte-nota espaco-ap">${tituloApresentacao}</td>'
+							+		'<td class="fonte-nota espaco-resumo">${resumoApresentacao}</td>'
+							+		'<td class="fonte-nota espaco-nt">${mediaFinal}</td>'
 							+	'</tr>'
 							+   '</tbody>'
 							+'</table>';
@@ -164,9 +194,9 @@
 							+	'</thead>'
 							+	'<tbody>'
 							+		'<tr>'
-							+			'<td class="fonte-nota">${autor}</td>'
-							+			'<td class="fonte-nota">${resumoApresentacao}</td>'
-							+			'<td class="fonte-nota">${mediaFinal}</td>'
+							+			'<td class="fonte-nota espaco-ap">${autor}</td>'
+							+			'<td class="fonte-nota espaco-resumo">${resumoApresentacao}</td>'
+							+			'<td class="fonte-nota espaco-nt">${mediaFinal}</td>'
 							+		'</tr>'
 							+	'</tbody>'
 							+'</table>';
