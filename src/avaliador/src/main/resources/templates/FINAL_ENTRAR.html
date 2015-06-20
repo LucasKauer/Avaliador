@@ -3,9 +3,14 @@
 	<head>
 		{{> head}}
 		<style>
-		.btn-info: hover {
-			background-color: black; 
-		}
+		@media screen and (max-width: 500px){
+            .login-form .btn {
+                width: 100%;
+                display: block;
+                margin-left: 0px;
+                margin-bottom: 10px;
+            }
+        }
 		</style>
 	</head>
 
