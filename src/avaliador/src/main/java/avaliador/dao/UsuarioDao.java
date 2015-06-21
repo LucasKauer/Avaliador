@@ -19,7 +19,7 @@ public class UsuarioDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	private static final String COMANDO_SQL_INSERT_USUARIO = "INSERT INTO Avaliador (Nome, Idade, Genero, Instituicao, Login, Senha) VALUES (?, ?, ?, ?, ?, ?)";
-	private static final String COMANDO_SQL_SELECT_USUARIO = "SELECT Nome, Login, Senha FROM Avaliador WHERE Login = ? AND Senha = ?";
+	private static final String COMANDO_SQL_SELECT_USUARIO = "SELECT Id_Avaliador, Nome, Login, Senha FROM Avaliador WHERE Login = ? AND Senha = ?";
 	
 	// Adiciona um usuario no banco
 	public void inserirUsuario(UsuarioAvaliador usuario) {
@@ -40,6 +40,7 @@ public class UsuarioDao {
 			@Override
 			public UsuarioAvaliador mapRow(ResultSet rs, int arg1) throws SQLException {
 				UsuarioAvaliador usuario = new UsuarioAvaliador();
+				usuario.setId(rs.getInt("Id_Avaliador"));
 				usuario.setNome(rs.getString("Nome"));
 				usuario.setLogin(rs.getString("Login"));
 				usuario.setSenha(rs.getString("Senha"));

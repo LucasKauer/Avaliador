@@ -8,6 +8,7 @@ public class Avaliacao extends Entidade {
 	private int notaApresentacao;
 	private boolean restricao;
 	private double mediaFinal;
+	
 	// FK
 	private int avaliadorId;
 	private int apresentacaoId;
