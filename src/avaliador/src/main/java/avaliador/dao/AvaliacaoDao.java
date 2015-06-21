@@ -11,8 +11,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import avaliador.model.Avaliacao;
-import avaliador.model.Categoria;
-import avaliador.model.Situacao;
 
 @Component
 public class AvaliacaoDao {

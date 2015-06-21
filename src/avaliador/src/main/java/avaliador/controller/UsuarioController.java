@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import avaliador.dao.UsuarioDao;
-import avaliador.model.NivelUsuario;
-import avaliador.model.Usuario;
+import avaliador.model.UsuarioAvaliador;
 
 @Controller
 public class UsuarioController {
@@ -20,7 +19,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "/entrar", method = RequestMethod.GET)
 	public String entrar(Model model, HttpSession session) {
-		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		UsuarioAvaliador usuario = (UsuarioAvaliador) session.getAttribute("usuarioLogado");
 		if(usuario != null) {
 			model.addAttribute("exibeAutenticacao", false);
 			model.addAttribute("exibeSair", true);
@@ -32,21 +31,20 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "/autenticar-usuario", method = RequestMethod.POST)
-	public String autenticarUsuario(HttpSession session, Model model, Usuario usuarioRecebido) {
-		Usuario usuarioRetornado = usuarioDao.validarUsuario(usuarioRecebido.getLogin(), usuarioRecebido.getSenha());
+	public String autenticarUsuario(HttpSession session, Model model, UsuarioAvaliador usuarioRecebido) {
+		UsuarioAvaliador usuarioRetornado = usuarioDao.validarUsuario(usuarioRecebido.getLogin(), usuarioRecebido.getSenha());
 		if(usuarioRetornado != null) {
-			session.setAttribute("usuarioLogado", usuarioRetornado);
-			if (usuarioRetornado.getTipoUsuario() == NivelUsuario.ADMINISTRADOR) {
-				session.setAttribute("ehAdministrador", usuarioRetornado);
+				session.setAttribute("usuarioLogado", usuarioRetornado);
+				model.addAttribute("login", true);
+				return "redirect:/home";
 			}
-			return "redirect:/home";
-		}
+			
 		return "FINAL_ENTRAR";
 	}
 	
 	@RequestMapping(value = "/cadastrar-usuario", method = RequestMethod.GET)
 	public String cadastrarUsuario(Model model, HttpSession session) {
-		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		UsuarioAvaliador usuario = (UsuarioAvaliador) session.getAttribute("usuarioLogado");
 		if(usuario != null) {
 			model.addAttribute("exibeAutenticacao", false);
 			model.addAttribute("exibeSair", true);
@@ -58,8 +56,8 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "/salvar-usuario", method = RequestMethod.POST)
-	public String salvarUsuario(HttpSession session, Model model, Usuario usuario) {
-		usuarioDao.inserirUsuario(usuario);;
+	public String salvarUsuario(HttpSession session, Model model, UsuarioAvaliador usuario) {
+		usuarioDao.inserirUsuario(usuario);
 		return "FINAL_ENTRAR";
 	}
 	

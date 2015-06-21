@@ -16,7 +16,6 @@ import avaliador.dao.ApresentacaoDao;
 import avaliador.model.Apresentacao;
 import avaliador.model.Categoria;
 import avaliador.model.Situacao;
-import avaliador.model.Usuario;
 
 @Controller
 public class ApresentacaoController {

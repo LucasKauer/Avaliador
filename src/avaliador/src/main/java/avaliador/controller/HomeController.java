@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import avaliador.dao.ApresentacaoDao;
 import avaliador.model.Avaliacao;
-import avaliador.model.Usuario;
+import avaliador.model.UsuarioAvaliador;
 
 @Controller
 public class HomeController {
@@ -24,7 +24,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
-		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		UsuarioAvaliador usuario = (UsuarioAvaliador) session.getAttribute("usuarioLogado");
 		if(usuario != null) {
 			model.addAttribute("exibeAutenticacao", false);
 			model.addAttribute("exibeSair", true);
@@ -37,7 +37,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String homeLogado(Model model, HttpSession session) {
-		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		UsuarioAvaliador usuario = (UsuarioAvaliador) session.getAttribute("usuarioLogado");
 		if(usuario != null) {
 			model.addAttribute("exibeAutenticacao", false);
 			model.addAttribute("exibeSair", true);
