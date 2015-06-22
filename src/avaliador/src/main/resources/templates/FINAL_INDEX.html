@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		{{> head}}
+		{{> headLogado}}
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <link rel="stylesheet" href="css/busca.css" type="text/css">
         <style>
@@ -62,10 +62,63 @@
             }
             
             .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default{
-                background-color: #394A59;
-                border-color: #394A59;
+                background-color: #16a085;
+                border-color: #16a085;
                 color: white;
             }
+
+			<!-- header -->
+			header {
+				width: 100%;
+				min-height: auto;
+			}
+
+			header .header-content {
+				position: relative;
+				width: 100%;
+				text-align: center;
+			}
+
+			header .header-content {
+				margin-bottom: 50px;
+				font-size: 4vw;
+				font-weight: 300;
+				color: #fffbfb;
+				font-weight: 500;
+			}
+
+			@media(min-width:768px) {
+				header {
+					min-height: 100%;
+				}
+
+				header .header-content {
+					position: absolute;
+					top: 50%;
+					padding: 0 50px;
+					-webkit-transform: translateY(-50%);
+					-ms-transform: translateY(-50%);
+					transform: translateY(-50%);
+				}
+
+				header .header-content .header-content-inner {
+					margin-right: auto;
+					margin-left: auto;
+					max-width: 1000px;
+				}
+
+				header .header-content .header-content-inner {
+					margin-right: auto;
+					margin-left: auto;
+					max-width: 80%;
+					font-size: 26px;
+				}
+			}
+			
+			.btn-info {
+				background-color: #16a085;
+			}
+			
         </style>
 	</head>
 	<body id="page-top">
@@ -85,6 +138,7 @@
 						</div>
 						<hr>
 						<p>Selecione a opção de busca.</p>
+						<br></br>
 						<div class="btn-group" data-toggle="buttons">
     						<label class="btn btn-default">
         						<input type="radio" name="opcao" id="radio_titulo" value="titulo">
@@ -195,7 +249,7 @@
 							}		
 						});
         			} else {
-        				        				$.ajax({
+        				 $.ajax({
 								url: '/buscar-autor?autor=' + nome,
 								type: 'POST'
 						 }).done(function(data) {					
