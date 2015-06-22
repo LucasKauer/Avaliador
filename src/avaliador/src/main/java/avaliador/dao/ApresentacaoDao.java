@@ -21,7 +21,7 @@ public class ApresentacaoDao {
 	@Inject
 	private JdbcTemplate jdbcTemplate;
 
-	private static final String COMANDO_SQL_SELECT = "SELECT Id_Apresentacao, Titulo, Resumo, Categoria, Data, Situacao FROM Apresentacao";
+	private static final String COMANDO_SQL_SELECT = "SELECT Id_Apresentacao, Titulo, Resumo, Categoria, DATE_FORMAT(Data, '%d/%m/%Y'), Situacao FROM Apresentacao";
 	private static final String COMANDO_SQL_INSERT = "INSERT INTO Apresentacao(Titulo, Resumo, Categoria, Data, Situacao) values (?, ?, ?, ?, ?)";
 	private static final String COMANDO_SQL_UPDATE = "UPDATE Avaliacao SET Titulo = ?, Resumo = ?, Categoria = ?, Data = ?, Situacao = ?  WHERE Id_Apresentacao = ?";
 	private static final String COMANDO_SQL_DELETE = "DELETE FROM Apresentacao WHERE Id_Apresentacao = ?";
@@ -108,7 +108,7 @@ public class ApresentacaoDao {
 					apresentacao.setResumo(results.getString("Resumo"));
 					apresentacao.setCategoria(Categoria.valueOf(results
 							.getString("Categoria")));
-					apresentacao.setData(results.getDate("Data"));
+					apresentacao.setData(results.getString("DATE_FORMAT(Data, '%d/%m/%Y')"));
 					apresentacao.setSituacao(Situacao.valueOf(results
 							.getString("Situacao")));
 					return apresentacao;
