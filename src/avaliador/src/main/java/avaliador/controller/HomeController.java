@@ -28,6 +28,7 @@ public class HomeController {
 		if(usuario != null) {
 			model.addAttribute("exibeAutenticacao", false);
 			model.addAttribute("exibeSair", true);
+			model.addAttribute("loginUsuario", session.getAttribute("usuarioLogado"));
 		} else {
 			model.addAttribute("exibeAutenticacao", true);
 			model.addAttribute("exibeSair", false);
