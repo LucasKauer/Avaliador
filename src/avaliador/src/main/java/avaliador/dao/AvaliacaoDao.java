@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import avaliador.model.Avaliacao;
+import avaliador.model.UsuarioAvaliador;
 
 @Component
 public class AvaliacaoDao {
@@ -19,7 +20,7 @@ public class AvaliacaoDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	private final String COMANDO_SQL_INSERT = "INSERT INTO AVALIACAO (Comentario_Geral, Critica_Tecnica, Nota_Conteudo, Nota_Inovacao, Nota_apresentacao, Restricao, Avaliador_Id, Apresentacao_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-	private final String COMANDO_SQL_UPDATE = "UPDATE AVALIACAO SET Comentario_Geral = ?, Critica_Tecnica = ?, Nota_Conteudo = ?, Nota_Inovacao = ?, Nota_apresentacao = ?, Restricao = ? WHERE Id_Avaliacao = ?";
+	private final String COMANDO_SQL_UPDATE = "UPDATE AVALIACAO SET Comentario_Geral = ?, Critica_Tecnica = ?, Nota_Conteudo = ?, Nota_Inovacao = ?, Nota_Apresentacao = ?, Restricao = ? WHERE Apresentacao_Id = ?";
 	private final String COMANDO_SQL_DELETE = "DELETE FROM AVALIACAO WHERE Id_Avaliacao = ?";
 	private final String COMANDO_SQL_SELECT = "SELECT Id_Avaliacao, Comentario_Geral, Critica_Tecnica, Nota_Conteudo, Nota_Inovacao, Nota_Apresentacao, Restricao FROM AVALIACAO";
 	
@@ -70,14 +71,15 @@ public class AvaliacaoDao {
 	 * @param idAvaliacao Avaliacao a ser editada
 	 * @param avaliacao Avaliacao com todos as informações
 	 * */
-	public void editarAvaliacao(int idAvaliacao, Avaliacao avaliacao){
+	public void editarAvaliacao(int idApresentacao, Avaliacao avaliacao){
 		jdbcTemplate.update(COMANDO_SQL_UPDATE,
-				idAvaliacao, avaliacao.getNotaConteudo(),
 				avaliacao.getComentarioGeral(),
 				avaliacao.getCriticaTecnica(),
+				avaliacao.getNotaConteudo(),
 				avaliacao.getNotaInovacao(),
 				avaliacao.getNotaApresentacao(),
-				avaliacao.isRestricao());
+				avaliacao.isRestricao(),
+				idApresentacao);
 	}
 	
 	/**
@@ -104,6 +106,12 @@ public class AvaliacaoDao {
 		});		
 		
 		return avaliacoes;
+	}
+	
+	public List<Integer> buscaAvaliacaoPassandoIdApresentacaoEUsuario(int idApresentacao, UsuarioAvaliador loginUsuario) {
+		 return jdbcTemplate.query("SELECT Nota_Conteudo FROM Avaliacao WHERE Apresentacao_Id = ? AND Avaliador_Id = ?", (ResultSet results, int rowNum) -> {	
+			 return results.getInt("Nota_Conteudo");
+		}, idApresentacao, loginUsuario.getId());
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import avaliador.dao.ApresentacaoDao;
 import avaliador.dao.AvaliacaoDao;
 import avaliador.model.Avaliacao;
+import avaliador.model.UsuarioAvaliador;
 
 @Controller
 public class AvaliacaoController {
@@ -33,8 +34,16 @@ public class AvaliacaoController {
 	}
 	
 	@RequestMapping(value = "/salvar-avaliacao", method = RequestMethod.POST)
-	public String salvarAvaliacao(Avaliacao avaliacao) {
-		avaliacaoDao.inserirAvaliacao(avaliacao);
+	public String salvarAvaliacao(Avaliacao avaliacao, HttpSession session) {
+		UsuarioAvaliador usuarioAvaliador = (UsuarioAvaliador) session.getAttribute("usuarioLogado");
+		int idApresentacao = avaliacao.getApresentacaoId();
+		
+		boolean aApresentacaoNaoFoiAvaliada = (avaliacaoDao.buscaAvaliacaoPassandoIdApresentacaoEUsuario(idApresentacao, usuarioAvaliador).isEmpty());
+		if(aApresentacaoNaoFoiAvaliada) {
+			avaliacaoDao.inserirAvaliacao(avaliacao);
+		} else {
+			avaliacaoDao.editarAvaliacao(idApresentacao, avaliacao);
+		}
 		return "redirect:/cadastro-avaliacao";
 	}
 	
